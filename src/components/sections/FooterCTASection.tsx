@@ -85,7 +85,7 @@ export function FooterCTASection() {
 
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000)
-    } catch (error) {
+    } catch (_error) {
       setSubmitStatus('error')
       setTimeout(() => setSubmitStatus('idle'), 5000)
     } finally {
@@ -115,7 +115,7 @@ export function FooterCTASection() {
           {submitStatus === 'success' && (
             <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-lg flex items-center gap-3 text-green-200">
               <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
-              <p>Thank you! Your request has been submitted successfully. We'll get back to you soon.</p>
+              <p>Thank you! Your request has been submitted successfully. We&apos;ll get back to you soon.</p>
             </div>
           )}
 

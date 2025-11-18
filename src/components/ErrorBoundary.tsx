@@ -44,7 +44,7 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
             <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" aria-hidden="true" />
             <h2 className="text-2xl font-bold text-brand-navy mb-2">Something went wrong</h2>
             <p className="text-slate-gray mb-6">
-              We're sorry, but something unexpected happened. Please try refreshing the page.
+              We&apos;re sorry, but something unexpected happened. Please try refreshing the page.
             </p>
             <AltairButton
               variant="bronze"

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { SectionContainer } from '@/components/ui/section-container'
 import { AltairBadge } from '@/components/ui/altair-badge'
 
@@ -31,14 +32,15 @@ export function TrustSignalsBar() {
             {clientLogos.map((client, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center w-20 h-12 md:w-24 md:h-16 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow flex-shrink-0"
+                className="relative flex items-center justify-center w-20 h-12 md:w-24 md:h-16 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow flex-shrink-0"
                 title={client.name}
               >
-                <img
+                <Image
                   src={client.image}
                   alt={client.name}
-                  className="w-full h-full object-contain p-2 grayscale hover:grayscale-0 transition-all"
-                  loading="lazy"
+                  fill
+                  className="object-contain p-2 grayscale hover:grayscale-0 transition-all"
+                  sizes="(max-width: 768px) 80px, 96px"
                 />
               </div>
             ))}
