@@ -61,8 +61,8 @@ export function FeaturedProjectsSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} {...project} />
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} {...project} priority={index === 0} />
           ))}
         </div>
       </SectionContainer>

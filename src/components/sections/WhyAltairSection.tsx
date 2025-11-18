@@ -78,7 +78,7 @@ export function WhyAltairSection() {
                 } ${isInView ? 'opacity-100 translate-x-0' : prop.reverse ? 'opacity-0 translate-x-10' : 'opacity-0 -translate-x-10'} transition-all duration-700`}
               >
                 <div className={prop.reverse ? 'md:order-2' : ''}>
-                  <div className="relative aspect-[4/3] md:h-96 rounded-lg overflow-hidden">
+                  <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
                     <Image
                       src={prop.image}
                       alt={prop.title}

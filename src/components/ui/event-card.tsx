@@ -84,11 +84,11 @@ export function EventCard({
         )}
 
         {registrationLink ? (
-          <AltairButton variant="bronze" size="sm" asChild className="w-full">
+          <AltairButton variant="bronze" size="sm" asChild className="w-full" aria-label={`Register for ${title}`}>
             <Link href={registrationLink}>Register Now</Link>
           </AltairButton>
         ) : (
-          <AltairButton variant="outline-bronze" size="sm" asChild className="w-full">
+          <AltairButton variant="outline-bronze" size="sm" asChild className="w-full" aria-label={`Learn more about ${title}`}>
             <Link href={`/events/${title.toLowerCase().replace(/\s+/g, '-')}`}>
               Learn More
             </Link>

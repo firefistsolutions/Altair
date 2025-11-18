@@ -128,82 +128,90 @@ export function FooterCTASection() {
 
           <form onSubmit={handleSubmit} className="space-y-4 text-left" noValidate>
             <div className="grid md:grid-cols-2 gap-4">
-              <div>
+              <div className="relative">
                 <Input
                   type="text"
                   name="name"
                   placeholder="Full Name"
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
-                  className={`bg-white/15 border-white/30 text-white placeholder:text-white/70 focus:bg-white/20 focus:border-white/50 ${
+                  className={`bg-white/20 border-white/40 text-white placeholder:text-white/80 focus:bg-white/25 focus:border-white/60 ${
                     errors.name ? 'border-red-400 focus:border-red-400' : ''
                   }`}
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? 'name-error' : undefined}
                 />
-                {errors.name && (
-                  <p id="name-error" className="mt-1 text-sm text-red-300" role="alert">
-                    {errors.name}
-                  </p>
-                )}
+                <div className="h-5 mt-1">
+                  {errors.name && (
+                    <p id="name-error" className="text-sm text-red-300" role="alert">
+                      {errors.name}
+                    </p>
+                  )}
+                </div>
               </div>
-              <div>
+              <div className="relative">
                 <Input
                   type="tel"
                   name="phone"
                   placeholder="Phone Number"
                   value={formData.phone}
                   onChange={(e) => handleChange('phone', e.target.value)}
-                  className={`bg-white/15 border-white/30 text-white placeholder:text-white/70 focus:bg-white/20 focus:border-white/50 ${
+                  className={`bg-white/20 border-white/40 text-white placeholder:text-white/80 focus:bg-white/25 focus:border-white/60 ${
                     errors.phone ? 'border-red-400 focus:border-red-400' : ''
                   }`}
                   aria-invalid={!!errors.phone}
                   aria-describedby={errors.phone ? 'phone-error' : undefined}
                 />
-                {errors.phone && (
-                  <p id="phone-error" className="mt-1 text-sm text-red-300" role="alert">
-                    {errors.phone}
-                  </p>
-                )}
+                <div className="h-5 mt-1">
+                  {errors.phone && (
+                    <p id="phone-error" className="text-sm text-red-300" role="alert">
+                      {errors.phone}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
-            <div>
+            <div className="relative">
               <Input
                 type="email"
                 name="email"
                 placeholder="Email Address"
                 value={formData.email}
                 onChange={(e) => handleChange('email', e.target.value)}
-                className={`bg-white/15 border-white/30 text-white placeholder:text-white/70 focus:bg-white/20 focus:border-white/50 ${
+                className={`bg-white/20 border-white/40 text-white placeholder:text-white/80 focus:bg-white/25 focus:border-white/60 ${
                   errors.email ? 'border-red-400 focus:border-red-400' : ''
                 }`}
                 aria-invalid={!!errors.email}
                 aria-describedby={errors.email ? 'email-error' : undefined}
               />
-              {errors.email && (
-                <p id="email-error" className="mt-1 text-sm text-red-300" role="alert">
-                  {errors.email}
-                </p>
-              )}
+              <div className="h-5 mt-1">
+                {errors.email && (
+                  <p id="email-error" className="text-sm text-red-300" role="alert">
+                    {errors.email}
+                  </p>
+                )}
+              </div>
             </div>
-            <div>
+            <div className="relative">
               <Textarea
                 name="message"
                 placeholder="Message"
                 rows={4}
                 value={formData.message}
                 onChange={(e) => handleChange('message', e.target.value)}
-                className={`bg-white/15 border-white/30 text-white placeholder:text-white/70 focus:bg-white/20 focus:border-white/50 resize-none ${
+                className={`bg-white/20 border-white/40 text-white placeholder:text-white/80 focus:bg-white/25 focus:border-white/60 resize-none ${
                   errors.message ? 'border-red-400 focus:border-red-400' : ''
                 }`}
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? 'message-error' : undefined}
               />
-              {errors.message && (
-                <p id="message-error" className="mt-1 text-sm text-red-300" role="alert">
-                  {errors.message}
-                </p>
-              )}
+              <div className="h-5 mt-1">
+                {errors.message && (
+                  <p id="message-error" className="text-sm text-red-300" role="alert">
+                    {errors.message}
+                  </p>
+                )}
+              </div>
             </div>
             <div className="text-center pt-2">
               <AltairButton

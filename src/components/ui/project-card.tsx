@@ -11,6 +11,7 @@ interface ProjectCardProps {
   client: string
   metrics: { label: string; value: string }[]
   slug: string
+  priority?: boolean
 }
 
 export function ProjectCard({
@@ -19,6 +20,7 @@ export function ProjectCard({
   client,
   metrics,
   slug,
+  priority = false,
 }: ProjectCardProps) {
   return (
     <Link href={`/projects/${slug}`} className="block h-full focus:outline-none focus:ring-2 focus:ring-brand-bronze focus:ring-offset-2 rounded-lg">
@@ -30,9 +32,10 @@ export function ProjectCard({
             fill
             className="object-cover group-hover:scale-110 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, 33vw"
+            priority={priority}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pb-4 px-4">
-            <AltairButton variant="bronze" size="sm" className="w-full">
+            <AltairButton variant="bronze" size="sm" className="w-full" aria-label={`View case study for ${title}`}>
               View Case Study
             </AltairButton>
           </div>

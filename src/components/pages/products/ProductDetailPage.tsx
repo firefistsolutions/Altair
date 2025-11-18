@@ -169,7 +169,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
                           setSelectedImageIndex(index)
                         }
                       }}
-                      className={`relative w-24 h-24 rounded-md overflow-hidden flex-shrink-0 border-2 transition-all focus:outline-none focus:ring-2 focus:ring-brand-bronze ${
+                      className={`relative w-16 h-16 md:w-24 md:h-24 rounded-md overflow-hidden flex-shrink-0 border-2 transition-all focus:outline-none focus:ring-2 focus:ring-brand-bronze ${
                         selectedImageIndex === index
                           ? 'border-brand-bronze ring-2 ring-brand-bronze/20'
                           : 'border-transparent hover:border-border-gray'
@@ -191,7 +191,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
 
             {/* Sticky Specs Card (Right 40%) */}
             <div className="md:col-span-2">
-              <div className="sticky top-[88px]">
+              <div className="sticky top-24">
                 <AltairCard className="p-6">
                   {/* Category & Featured Badge */}
                   <div className="flex items-center gap-2 mb-4">
@@ -298,32 +298,32 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
         <SectionContainer>
           <div className="max-w-4xl">
             <h2 className="text-3xl font-bold text-brand-navy mb-8">Technical Specifications</h2>
-            {/* Desktop Table */}
-            <div className="hidden md:block">
-              <AltairCard className="overflow-hidden p-0">
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead className="bg-brand-navy text-white">
-                      <tr>
-                        <th className="px-6 py-4 text-left font-semibold">Specification</th>
-                        <th className="px-6 py-4 text-left font-semibold">Details</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {technicalSpecs.map((spec, index) => (
-                        <tr
-                          key={index}
-                          className={index % 2 === 0 ? 'bg-white' : 'bg-light-gray'}
-                        >
-                          <td className="px-6 py-4 font-medium text-brand-navy">{spec.label}</td>
-                          <td className="px-6 py-4 text-slate-gray">{spec.value}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </AltairCard>
-            </div>
+                 {/* Desktop Table */}
+                 <div className="hidden md:block">
+                   <AltairCard className="overflow-hidden p-0">
+                     <div className="overflow-x-auto">
+                       <table className="w-full">
+                         <thead className="bg-brand-navy text-white">
+                           <tr>
+                             <th className="px-6 py-4 text-left font-semibold border-b border-brand-navy/20">Specification</th>
+                             <th className="px-6 py-4 text-left font-semibold border-b border-brand-navy/20">Details</th>
+                           </tr>
+                         </thead>
+                         <tbody>
+                           {technicalSpecs.map((spec, index) => (
+                             <tr
+                               key={index}
+                               className={`${index % 2 === 0 ? 'bg-white' : 'bg-light-gray'} border-b border-border-gray/50`}
+                             >
+                               <td className="px-6 py-4 font-medium text-brand-navy">{spec.label}</td>
+                               <td className="px-6 py-4 text-slate-gray">{spec.value}</td>
+                             </tr>
+                           ))}
+                         </tbody>
+                       </table>
+                     </div>
+                   </AltairCard>
+                 </div>
             {/* Mobile Cards */}
             <div className="md:hidden space-y-3">
               {technicalSpecs.map((spec, index) => (

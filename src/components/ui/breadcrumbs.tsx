@@ -22,8 +22,8 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
         className="hover:text-brand-bronze transition-colors flex items-center gap-1"
         aria-label="Home"
       >
-        <Home className="w-4 h-4" />
-        <span className="sr-only md:not-sr-only">Home</span>
+        <Home className="w-4 h-4" aria-hidden="true" />
+        <span className="sr-only md:not-sr-only ml-1">Home</span>
       </Link>
       {items.map((item, index) => (
         <span key={index} className="flex items-center gap-2">

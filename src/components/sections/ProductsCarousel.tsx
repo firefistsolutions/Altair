@@ -185,11 +185,11 @@ export function ProductsCarousel() {
             aria-label="Product carousel"
             tabIndex={0}
           >
-            {products.map((product) => (
-              <div key={product.id} className="flex-shrink-0 w-full sm:w-80">
-                <ProductCard {...product} category={product.category} />
-              </div>
-            ))}
+                  {products.map((product, index) => (
+                    <div key={product.id} className="flex-shrink-0 w-full sm:w-80">
+                      <ProductCard {...product} category={product.category} priority={index === 0} />
+                    </div>
+                  ))}
           </div>
         </div>
 

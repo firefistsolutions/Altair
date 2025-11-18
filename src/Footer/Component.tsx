@@ -20,7 +20,7 @@ export async function Footer() {
           {/* Company Info */}
           <div>
             <Link className="flex items-center mb-4" href="/">
-              <Logo />
+              <Logo variant="light" className="w-20 md:w-[100px]" />
             </Link>
             <p className="text-sm text-white/80 mb-2">
               Modular Operation Theatres & Medical Gas Systems
@@ -34,13 +34,13 @@ export async function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Products</h4>
             <nav className="flex flex-col gap-2">
-              <Link href="/products" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link href="/products" className="text-white/80 hover:text-white hover:underline text-sm transition-colors">
                 All Products
               </Link>
-              <Link href="/products/modular-ot" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link href="/products/modular-ot" className="text-white/80 hover:text-white hover:underline text-sm transition-colors">
                 Modular OT
               </Link>
-              <Link href="/products/medical-gas" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link href="/products/medical-gas" className="text-white/80 hover:text-white hover:underline text-sm transition-colors">
                 Medical Gas Systems
               </Link>
             </nav>
@@ -50,13 +50,13 @@ export async function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Resources</h4>
             <nav className="flex flex-col gap-2">
-              <Link href="/resources" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link href="/resources" className="text-white/80 hover:text-white hover:underline text-sm transition-colors">
                 Resources
               </Link>
-              <Link href="/blog" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link href="/blog" className="text-white/80 hover:text-white hover:underline text-sm transition-colors">
                 Blog
               </Link>
-              <Link href="/events" className="text-white/80 hover:text-white text-sm transition-colors">
+              <Link href="/events" className="text-white/80 hover:text-white hover:underline text-sm transition-colors">
                 Events
               </Link>
             </nav>

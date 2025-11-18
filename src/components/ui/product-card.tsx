@@ -16,6 +16,7 @@ interface ProductCardProps {
   category?: string
   featured?: boolean
   datasheetUrl?: string
+  priority?: boolean
 }
 
 export function ProductCard({
@@ -29,17 +30,18 @@ export function ProductCard({
   datasheetUrl,
 }: ProductCardProps) {
   return (
-    <AltairCard className="group overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow">
-      <div className="relative h-48 overflow-hidden flex-shrink-0">
+    <AltairCard className="group overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow" aria-label={`Product: ${title}`}>
+      <div className="relative aspect-[4/3] overflow-hidden flex-shrink-0">
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-500"
+          className="object-cover group-hover:scale-110 transition-transform duration-300"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          priority={priority}
         />
-        <div className="absolute top-4 right-4 flex flex-col gap-2 items-end">
-          {featured && <AltairBadge variant="bronze">Featured</AltairBadge>}
+        <div className="absolute top-4 right-4 flex flex-wrap gap-2 items-start justify-end max-w-[60%]">
+          {featured && <AltairBadge variant="bronze" size="sm">Featured</AltairBadge>}
           {category && (
             <AltairBadge variant="outline" size="sm" className="bg-white/90">
               {category}

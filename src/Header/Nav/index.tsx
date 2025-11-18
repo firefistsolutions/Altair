@@ -23,7 +23,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const itemsToRender = navItems.length > 0 ? navItems : fallbackNavItems
 
   return (
-    <nav className="flex flex-col md:flex-row gap-3 md:items-center" aria-label="Main navigation">
+    <nav className="flex flex-col md:flex-row gap-4 md:gap-6 md:items-center" aria-label="Main navigation">
       {itemsToRender.map(({ link }, i) => {
         // Use CMSLink if it's from CMS, otherwise use regular Link
         if (navItems.length > 0) {
@@ -33,7 +33,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
             <Link
               key={i}
               href={link?.url || '#'}
-              className="text-brand-navy hover:text-brand-bronze transition-colors font-medium text-sm md:text-base"
+              className="text-brand-navy hover:text-brand-bronze transition-colors font-medium text-sm md:text-base px-2 py-1 md:px-3 md:py-2"
             >
               {link?.label || 'Link'}
             </Link>
@@ -42,7 +42,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       })}
       <Link
         href="/search"
-        className="p-2 rounded-md hover:bg-light-gray focus:outline-none focus:ring-2 focus:ring-brand-bronze transition-colors"
+        className="p-2 rounded-md hover:bg-light-gray focus:outline-none focus:ring-2 focus:ring-brand-bronze transition-colors ml-2"
         aria-label="Search"
       >
         <span className="sr-only">Search</span>

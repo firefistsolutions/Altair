@@ -70,7 +70,17 @@ const pastEvents = [
 
 export function EventsSection() {
   const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming')
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const events = activeTab === 'upcoming' ? upcomingEvents : pastEvents
+
+  const handleTabChange = (tab: 'upcoming' | 'past') => {
+    if (tab === activeTab) return
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setActiveTab(tab)
+      setIsTransitioning(false)
+    }, 150)
+  }
 
   return (
     <section className="py-16 md:py-24 bg-brand-navy text-white">
@@ -85,12 +95,12 @@ export function EventsSection() {
         {/* Toggle Tabs */}
         <div className="flex justify-center gap-4 mb-8" role="tablist" aria-label="Event categories">
           <button
-            onClick={() => setActiveTab('upcoming')}
+            onClick={() => handleTabChange('upcoming')}
             role="tab"
             aria-selected={activeTab === 'upcoming'}
             aria-controls="upcoming-events"
             id="tab-upcoming"
-            className={`px-6 py-2 rounded-lg font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-brand-bronze focus:ring-offset-2 focus:ring-offset-brand-navy ${
+            className={`px-6 py-2 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-bronze focus:ring-offset-2 focus:ring-offset-brand-navy ${
               activeTab === 'upcoming'
                 ? 'bg-brand-bronze text-white'
                 : 'bg-white/10 text-white/70 hover:bg-white/20'
@@ -99,12 +109,12 @@ export function EventsSection() {
             Upcoming Events
           </button>
           <button
-            onClick={() => setActiveTab('past')}
+            onClick={() => handleTabChange('past')}
             role="tab"
             aria-selected={activeTab === 'past'}
             aria-controls="past-events"
             id="tab-past"
-            className={`px-6 py-2 rounded-lg font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-brand-bronze focus:ring-offset-2 focus:ring-offset-brand-navy ${
+            className={`px-6 py-2 rounded-lg font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-bronze focus:ring-offset-2 focus:ring-offset-brand-navy ${
               activeTab === 'past'
                 ? 'bg-brand-bronze text-white'
                 : 'bg-white/10 text-white/70 hover:bg-white/20'
@@ -124,7 +134,9 @@ export function EventsSection() {
             id={activeTab === 'upcoming' ? 'upcoming-events' : 'past-events'}
             role="tabpanel"
             aria-labelledby={`tab-${activeTab}`}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+            className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 transition-opacity duration-300 ${
+              isTransitioning ? 'opacity-0' : 'opacity-100'
+            }`}
           >
             {events.map((event) => (
               <EventCard

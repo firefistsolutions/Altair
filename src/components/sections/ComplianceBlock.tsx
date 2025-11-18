@@ -18,7 +18,7 @@ export function ComplianceBlock() {
       <SectionContainer>
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Compliance Icons Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {complianceItems.map((item, index) => (
               <div
                 key={index}

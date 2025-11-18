@@ -79,7 +79,7 @@ export function TestimonialsSection() {
           <AltairCard className="relative p-8 md:p-12">
             <Quote className="absolute top-4 left-4 text-soft-aqua opacity-40 w-12 h-12" aria-hidden="true" />
             
-            <blockquote className="text-lg md:text-xl italic mb-6 text-brand-navy relative z-10 max-h-48 overflow-y-auto">
+            <blockquote className="text-lg md:text-xl italic mb-6 text-brand-navy relative z-10 leading-relaxed">
               &ldquo;{currentTestimonial.quote}&rdquo;
             </blockquote>
 

@@ -32,7 +32,7 @@ export function TrustSignalsBar() {
             {clientLogos.map((client, index) => (
               <div
                 key={index}
-                className="relative flex items-center justify-center w-20 h-12 md:w-24 md:h-16 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow flex-shrink-0"
+                className="relative flex items-center justify-center w-20 h-20 md:w-24 md:h-24 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow flex-shrink-0"
                 title={client.name}
               >
                 <Image

@@ -51,15 +51,15 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     >
       <div className="container py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center" aria-label="Altair Medical System Home">
-          <Logo loading="eager" priority="high" className="h-8 w-auto" />
+          <Logo loading="eager" priority="high" className="w-20 md:w-[100px]" />
         </Link>
         
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-6">
           <HeaderNav data={data} />
           <Link
             href="/request-quote"
-            className="px-4 py-2 bg-brand-bronze text-white rounded-md font-semibold hover:bg-brand-bronze/90 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-bronze focus:ring-offset-2"
+            className="px-5 py-2.5 bg-brand-bronze text-white rounded-md font-semibold hover:bg-brand-bronze/90 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-bronze focus:ring-offset-2 ml-2"
           >
             Get Quote
           </Link>
@@ -82,7 +82,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-border-gray bg-white">
+        <div className="md:hidden border-t border-border-gray bg-white animate-in slide-in-from-top-2 duration-300">
           <nav className="container py-4 flex flex-col gap-4">
             <HeaderNav data={data} />
             <Link

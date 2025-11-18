@@ -199,8 +199,8 @@ export function ProductsListingPage() {
         </SectionContainer>
       </section>
 
-      {/* Filters and Search Bar */}
-      <section className="border-b border-border-gray bg-white sticky top-[73px] z-30">
+          {/* Filters and Search Bar */}
+          <section className="border-b border-border-gray bg-white sticky top-[73px] md:top-24 z-30">
         <SectionContainer>
           <div className="py-4">
             {/* Mobile Filter Toggle */}
@@ -370,6 +370,11 @@ export function ProductsListingPage() {
             </div>
           ) : filteredProducts.length === 0 ? (
             <div className="text-center py-16">
+              <div className="w-16 h-16 mx-auto mb-4 text-slate-gray/40">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
               <p className="text-xl text-slate-gray mb-4">No products found</p>
               <p className="text-slate-gray mb-2">Try adjusting your filters or search query</p>
               <p className="text-sm text-slate-gray/80 mb-6">
@@ -446,7 +451,11 @@ export function ProductsListingPage() {
                           </button>
                         )
                       } else if (page === currentPage - 2 || page === currentPage + 2) {
-                        return <span key={page} className="px-2 text-slate-gray">...</span>
+                        return (
+                          <span key={page} className="px-2 text-slate-gray" title={`Pages ${currentPage - 1 > 2 ? `${currentPage - 1}` : ''} to ${currentPage + 1 < totalPages - 1 ? `${currentPage + 1}` : ''}`}>
+                            ...
+                          </span>
+                        )
                       }
                       return null
                     })}

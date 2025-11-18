@@ -55,6 +55,23 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     )
   }
 
+  /* Style for link appearance in navigation */
+  if (appearance === 'link') {
+    return (
+      <Link
+        className={cn(
+          'text-brand-navy hover:text-brand-bronze transition-colors font-medium text-sm md:text-base px-2 py-1 md:px-3 md:py-2',
+          className
+        )}
+        href={href || url || ''}
+        {...newTabProps}
+      >
+        {label && label}
+        {children && children}
+      </Link>
+    )
+  }
+
   return (
     <Button asChild className={className} size={size} variant={appearance}>
       <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
