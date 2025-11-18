@@ -28,6 +28,7 @@ export function ProductCard({
   category,
   featured = false,
   datasheetUrl,
+  priority = false,
 }: ProductCardProps) {
   return (
     <AltairCard className="group overflow-hidden h-full flex flex-col hover:shadow-lg transition-shadow" aria-label={`Product: ${title}`}>
