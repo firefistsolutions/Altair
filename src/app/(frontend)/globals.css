@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Altair animations */
+@import '../../styles/animations.css';
+
 @layer base {
   h1,
   h2,

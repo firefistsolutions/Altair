@@ -61,7 +61,28 @@ export default buildConfig({
   editor: defaultLexical,
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      // Handle Supabase connection string - ensure SSL is configured correctly
+      connectionString: (() => {
+        const uri = process.env.DATABASE_URI || '';
+        if (!uri) return uri;
+        
+        // For Supabase, replace sslmode=require with sslmode=no-verify
+        // or add it if not present
+        if (uri.includes('sslmode=require')) {
+          return uri.replace('sslmode=require', 'sslmode=no-verify');
+        } else if (uri.includes('sslmode=')) {
+          // Already has sslmode, keep it but ensure it's no-verify
+          return uri.replace(/sslmode=[^&]*/, 'sslmode=no-verify');
+        } else {
+          // Add sslmode=no-verify if not present
+          const separator = uri.includes('?') ? '&' : '?';
+          return `${uri}${separator}sslmode=no-verify`;
+        }
+      })(),
+      // Explicitly set SSL config for pg library to allow self-signed certificates
+      ssl: {
+        rejectUnauthorized: false,
+      },
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users],

@@ -49,6 +49,12 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        // Altair custom animations
+        'fade-in': 'fade-in 0.6s ease-out',
+        'fade-in-up': 'fade-in-up 0.6s ease-out',
+        'slide-in': 'slide-in 0.5s ease-out',
+        'slide-in-left': 'slide-in-left 0.5s ease-out',
+        'slide-in-right': 'slide-in-right 0.5s ease-out',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -56,6 +62,21 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        // Altair Brand Colors (from Logo)
+        'brand-navy': '#163852',      // Primary dark blue from logo
+        'brand-bronze': '#B8860B',     // Golden bronze from logo
+        'brand-gold': '#D4AF37',       // Lighter gold variant
+        // Supporting Colors (from spec)
+        'deep-teal': '#0F6674',
+        'soft-aqua': '#66C2C9',
+        'signal-orange': '#FF7A2F',   // Use sparingly for critical CTAs
+        // Neutral Colors
+        'clinical-white': '#FFFFFF',
+        'slate-gray': '#6B7280',
+        'light-gray': '#F3F4F6',
+        'border-gray': '#E5E7EB',
+        'dark-bg': '#0A1929',
+        // shadcn/ui colors (keep for compatibility)
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
@@ -94,8 +115,12 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
+        // Inter font for headings and body (as per spec)
+        heading: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        // Keep mono for code blocks
         mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
       },
       keyframes: {
         'accordion-down': {
@@ -105,6 +130,27 @@ const config = {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
+        },
+        // Altair custom animation keyframes
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'fade-in-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'slide-in': {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'slide-in-left': {
+          '0%': { opacity: '0', transform: 'translateX(-30px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'slide-in-right': {
+          '0%': { opacity: '0', transform: 'translateX(30px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
         },
       },
       typography: () => ({
