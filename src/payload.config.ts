@@ -64,7 +64,16 @@ export default buildConfig({
       // Handle Supabase connection string - ensure SSL is configured correctly
       connectionString: (() => {
         const uri = process.env.DATABASE_URI || '';
-        if (!uri) return uri;
+        if (!uri) {
+          // During build, if no DATABASE_URI, throw a clear error
+          // User should set DATABASE_URI in .env file
+          if (process.env.NEXT_PHASE === 'phase-production-build') {
+            console.warn('⚠️  DATABASE_URI not set during build. Payload CMS features may be limited.');
+            // Return a dummy connection that will fail gracefully
+            return 'postgresql://build-time-dummy:5432/dummy?sslmode=disable';
+          }
+          return uri;
+        }
         
         // For Supabase, replace sslmode=require with sslmode=no-verify
         // or add it if not present
@@ -83,6 +92,10 @@ export default buildConfig({
       ssl: {
         rejectUnauthorized: false,
       },
+      // During build, don't actually connect - set max connections to 0
+      ...(process.env.NEXT_PHASE === 'phase-production-build' && !process.env.DATABASE_URI
+        ? { max: 0 }
+        : {}),
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users],

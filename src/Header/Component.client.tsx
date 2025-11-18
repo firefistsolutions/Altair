@@ -46,12 +46,12 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header
-      className="sticky top-0 z-50 bg-white/95 dark:bg-black/95 backdrop-blur-md border-b border-border-gray"
+      className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-border-gray"
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <div className="container py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center" aria-label="Altair Medical System Home">
-          <Logo loading="eager" priority="high" className="h-8 w-auto dark:invert" />
+          <Logo loading="eager" priority="high" className="h-8 w-auto" />
         </Link>
         
         {/* Desktop Navigation */}
@@ -82,7 +82,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-border-gray bg-white dark:bg-black">
+        <div className="md:hidden border-t border-border-gray bg-white">
           <nav className="container py-4 flex flex-col gap-4">
             <HeaderNav data={data} />
             <Link
