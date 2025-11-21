@@ -31,13 +31,9 @@ export const InitTheme: React.FC = () => {
 
     if (themeIsValid(preference)) {
       themeToSet = preference
-    } else {
-      var implicitPreference = getImplicitPreference()
-
-      if (implicitPreference) {
-        themeToSet = implicitPreference
-      }
     }
+    // Always use defaultTheme ('light') when no preference is stored
+    // System preference is only used when user explicitly selects "Auto"
 
     document.documentElement.setAttribute('data-theme', themeToSet)
   })();

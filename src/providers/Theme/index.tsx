@@ -39,13 +39,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (themeIsValid(preference)) {
       themeToSet = preference
-    } else {
-      const implicitPreference = getImplicitPreference()
-
-      if (implicitPreference) {
-        themeToSet = implicitPreference
-      }
     }
+    // Always use defaultTheme ('light') when no preference is stored
+    // System preference is only used when user explicitly selects "Auto"
 
     document.documentElement.setAttribute('data-theme', themeToSet)
     setThemeState(themeToSet)
