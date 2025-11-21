@@ -284,7 +284,7 @@ export default function Layout1() {
         </div>
         <div className="testimonials-grid">
           <div className="testimonial-card">
-            <div className="quote-icon">"</div>
+            <div className="quote-icon">&ldquo;</div>
             <p className="testimonial-text">The modular OT system has completely transformed our surgical department. The precision engineering and attention to sterile protocols are exceptional. Our surgical outcomes have improved significantly.</p>
             <div className="testimonial-author">
               <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop" alt="Dr. Sarah Johnson" />
@@ -295,7 +295,7 @@ export default function Layout1() {
             </div>
           </div>
           <div className="testimonial-card">
-            <div className="quote-icon">"</div>
+            <div className="quote-icon">&ldquo;</div>
             <p className="testimonial-text">Outstanding support and reliability. Their medical devices have significantly improved our patient monitoring capabilities. The real-time data integration is seamless and has enhanced our clinical decision-making.</p>
             <div className="testimonial-author">
               <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=100&h=100&fit=crop" alt="Dr. Michael Chen" />
@@ -306,7 +306,7 @@ export default function Layout1() {
             </div>
           </div>
           <div className="testimonial-card">
-            <div className="quote-icon">"</div>
+            <div className="quote-icon">&ldquo;</div>
             <p className="testimonial-text">From planning to installation, the team demonstrated exceptional expertise. Our new ICU is world-class and meets all international standards. The project was delivered on time and within budget.</p>
             <div className="testimonial-author">
               <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=100&h=100&fit=crop" alt="Dr. Priya Sharma" />

@@ -203,7 +203,7 @@ export default function Layout3() {
 
                 <div className="testimonials-grid">
                     <div className="testimonial-item">
-                        <div className="quote-symbol">"</div>
+                        <div className="quote-symbol">&ldquo;</div>
                         <p className="testimonial-quote">The modular OT system has completely transformed our surgical department. The precision engineering and attention to sterile protocols are exceptional.</p>
                         <div className="testimonial-author">
                             <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop" alt="Dr. Sarah Johnson" className="author-photo" />
@@ -215,7 +215,7 @@ export default function Layout3() {
                     </div>
 
                     <div className="testimonial-item">
-                        <div className="quote-symbol">"</div>
+                        <div className="quote-symbol">&ldquo;</div>
                         <p className="testimonial-quote">Outstanding support and reliability. Their medical devices have significantly improved our patient monitoring capabilities.</p>
                         <div className="testimonial-author">
                             <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=100&h=100&fit=crop" alt="Dr. Michael Chen" className="author-photo" />
@@ -227,7 +227,7 @@ export default function Layout3() {
                     </div>
 
                     <div className="testimonial-item">
-                        <div className="quote-symbol">"</div>
+                        <div className="quote-symbol">&ldquo;</div>
                         <p className="testimonial-quote">From planning to installation, the team demonstrated exceptional expertise. Our new ICU is world-class.</p>
                         <div className="testimonial-author">
                             <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=100&h=100&fit=crop" alt="Dr. Priya Sharma" className="author-photo" />

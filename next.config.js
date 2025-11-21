@@ -37,6 +37,10 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
+  eslint: {
+    // Disable img element warnings for demo layouts
+    ignoreDuringBuilds: false,
+  },
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })

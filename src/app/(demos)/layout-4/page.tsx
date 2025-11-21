@@ -253,7 +253,7 @@ export default function Layout4() {
 
                 <div className="testimonials-grid">
                     <div className="testimonial-card">
-                        <div className="quote-mark">"</div>
+                        <div className="quote-mark">&ldquo;</div>
                         <p>The modular OT system has transformed our surgical department. The precision engineering is exceptional.</p>
                         <div className="testimonial-author">
                             <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&h=100&fit=crop" alt="Dr. Sarah Johnson" />
@@ -265,7 +265,7 @@ export default function Layout4() {
                     </div>
 
                     <div className="testimonial-card">
-                        <div className="quote-mark">"</div>
+                        <div className="quote-mark">&ldquo;</div>
                         <p>Outstanding support and reliability. Their medical devices have significantly improved our patient monitoring.</p>
                         <div className="testimonial-author">
                             <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=100&h=100&fit=crop" alt="Dr. Michael Chen" />
@@ -277,7 +277,7 @@ export default function Layout4() {
                     </div>
 
                     <div className="testimonial-card">
-                        <div className="quote-mark">"</div>
+                        <div className="quote-mark">&ldquo;</div>
                         <p>From planning to installation, the team demonstrated exceptional expertise. Our new ICU is world-class.</p>
                         <div className="testimonial-author">
                             <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=100&h=100&fit=crop" alt="Dr. Priya Sharma" />
@@ -294,7 +294,7 @@ export default function Layout4() {
             <section className="final-cta">
                 <div className="cta-box">
                     <h2>Ready to Elevate Your Healthcare Facility?</h2>
-                    <p>Let's discuss how our solutions can meet your specific needs and transform patient care</p>
+                    <p>Let&apos;s discuss how our solutions can meet your specific needs and transform patient care</p>
                     <div className="cta-buttons">
                         <button className="cta-button-primary">Schedule Consultation</button>
                         <button className="cta-button-secondary">Download Brochure</button>
