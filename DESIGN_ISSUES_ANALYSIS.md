@@ -1,232 +1,370 @@
-# Design Issues Analysis - Altair Medical System Website
+# Design Issues Analysis - Comprehensive Review
 
-## Analysis Date: Current
-## Phases Completed: Phase 1, Phase 2, Phase 3.1 (Products Pages)
-
----
-
-## 🔴 CRITICAL ISSUES
-
-### 1. **Inconsistent Section Spacing**
-   - **Issue**: Some sections use `py-16 md:py-24`, others use `py-12 md:py-16`, creating visual inconsistency
-   - **Affected Sections**:
-     - HeroSection: Uses `h-screen` (no padding)
-     - TrustSignalsBar: Uses `py-8` (smaller than others)
-     - WhatWeDoSection: Uses `py-16 md:py-24` ✓
-     - WhyAltairSection: Uses `py-16 md:py-24` ✓
-     - ProductsCarousel: Uses `py-16 md:py-24` ✓
-     - FeaturedProjectsSection: Uses `py-16 md:py-24` ✓
-     - EventsSection: Uses `py-16 md:py-24` ✓
-     - ComplianceBlock: Uses `py-16 md:py-24` ✓
-     - TestimonialsSection: Uses `py-16 md:py-24` ✓
-     - FooterCTASection: Uses `py-16 md:py-24` ✓
-   - **Recommendation**: Standardize all sections to `py-16 md:py-24` except TrustSignalsBar (which should remain smaller)
-
-### 2. **Product Detail Page - Sticky Sidebar Top Offset**
-   - **File**: `altair/src/components/pages/products/ProductDetailPage.tsx`
-   - **Issue**: Sticky sidebar uses `top-[88px]` which may not account for header height changes
-   - **Line**: 194
-   - **Recommendation**: Use CSS variable or calculate dynamically based on header height
+## Executive Summary
+This document lists all design issues identified across the Altair Medical System website. Issues are categorized by priority and type for systematic resolution.
 
 ---
 
-## 🟡 HIGH PRIORITY ISSUES
+## 🔴 CRITICAL ISSUES (High Priority - Affects User Experience)
 
-### 3. **Typography Inconsistency**
-   - **Issue**: Heading sizes vary across sections without clear hierarchy
-   - **Examples**:
-     - HeroSection: `text-4xl md:text-5xl lg:text-6xl` (h1)
-     - Section headings: `text-3xl md:text-4xl` (h2)
-     - Product cards: `text-xl` (h3)
-     - **Recommendation**: Create a typography scale and document it
+### 1. **Form Design Issues**
 
-### 4. **Color Contrast Issues**
-   - **Issue**: Some text may not meet WCAG AA contrast requirements
-   - **Specific Issues**:
-     - FooterCTASection: White text on `bg-white/15` inputs may have low contrast
-     - TestimonialsSection: Quote text color needs verification
-     - TrustSignalsBar: `text-slate-gray` on `bg-light-gray` may be too subtle
-   - **Recommendation**: Test all color combinations with contrast checker
+#### 1.1 Form Input Hover Effects
+**Location:** All form pages (Contact, Request Quote, Request Survey, Footer CTA)
+**Issue:** Form inputs have hover effects that are unnecessary and can be distracting
+**Impact:** Poor UX, unprofessional appearance
+**Files Affected:**
+- `src/components/ui/input.tsx`
+- `src/components/ui/textarea.tsx`
+- `src/components/ui/select.tsx`
+- All form pages
 
-### 5. **Mobile Responsiveness - Header Logo**
-   - **File**: `altair/src/Header/Component.client.tsx`
-   - **Issue**: Logo is fixed at 100px width, may be too large on small mobile screens
-   - **Line**: 54
-   - **Recommendation**: Add responsive sizing: `w-20 md:w-[100px]`
+#### 1.2 Select Dropdown Visibility Issues
+**Location:** Select components (Project Type, Time Selection, etc.)
+**Issue:** 
+- Options in select dropdowns may not be clearly visible
+- Check icon/logo in select items is unnecessary and takes space
+- Dropdown styling may have contrast issues
+**Impact:** Users cannot see options clearly, poor accessibility
+**Files Affected:**
+- `src/components/ui/select.tsx`
+- `src/components/pages/request-quote/RequestQuotePage.tsx`
+- `src/components/pages/request-survey/RequestSurveyPage.tsx`
 
-### 6. **Product Cards - Image Aspect Ratio**
-   - **File**: `altair/src/components/ui/product-card.tsx`
-   - **Issue**: Product card images use fixed `h-48` which may cause inconsistent aspect ratios
-   - **Line**: 33
-   - **Recommendation**: Use `aspect-ratio` CSS property for consistent ratios
-
-### 7. **Events Section - Featured Event Grid Layout**
-   - **File**: `altair/src/components/ui/event-card.tsx`
-   - **Issue**: Featured events span 2 columns on `md` and `lg`, but may look unbalanced with 3-column grid
-   - **Line**: 40
-   - **Recommendation**: Consider making featured events full-width or adjusting grid layout
-
-### 8. **Products Listing Page - Filter Bar Sticky Position**
-   - **File**: `altair/src/components/pages/products/ProductsListingPage.tsx`
-   - **Issue**: Filter bar uses `sticky top-[73px]` which may not match actual header height
-   - **Line**: 179
-   - **Recommendation**: Use CSS variable or calculate dynamically
-
-### 9. **Testimonials Section - Quote Overflow**
-   - **File**: `altair/src/components/sections/TestimonialsSection.tsx`
-   - **Issue**: Quote has `max-h-48 overflow-y-auto` which creates scrollable area
-   - **Line**: 82
-   - **Recommendation**: Either expand height or truncate with "Read more" functionality
+#### 1.3 Form Field Spacing Inconsistency
+**Location:** All forms
+**Issue:** Inconsistent spacing between form fields across different pages
+**Impact:** Visual inconsistency, unprofessional appearance
 
 ---
 
-## 🟢 MEDIUM PRIORITY ISSUES
+### 2. **Visual Hierarchy & Typography**
 
-### 10. **Inconsistent Button Sizes**
-   - **Issue**: Buttons use different sizes (`sm`, `lg`, default) without clear pattern
-   - **Examples**:
-     - Product cards: `size="sm"`
-     - HeroSection CTAs: `size="lg"`
-     - EventsSection: `size="lg"`
-   - **Recommendation**: Document button size usage guidelines
+#### 2.1 Heading Size Inconsistencies
+**Location:** Multiple pages
+**Issue:** 
+- Hero headings vary: `text-4xl md:text-5xl lg:text-6xl` (homepage) vs `text-4xl md:text-5xl` (other pages)
+- Section headings inconsistent: Some use `text-3xl md:text-4xl`, others vary
+**Impact:** Lack of visual consistency across pages
+**Files Affected:**
+- All page components
+- Section components
 
-### 11. **Missing Loading States**
-   - **Issue**: Some components don't show loading states during data fetching
-   - **Affected**:
-     - ProductsCarousel (when loading products)
-     - EventsSection (when loading events)
-     - FeaturedProjectsSection (when loading projects)
-   - **Recommendation**: Add skeleton loaders or spinners
+#### 2.2 Text Color Contrast Issues
+**Location:** Multiple sections
+**Issue:**
+- Some text uses `text-white/80` or `text-white/90` which may not meet WCAG AA standards
+- Gray text (`text-slate-gray`) may be too light on white backgrounds
+**Impact:** Accessibility issues, readability problems
+**Files Affected:**
+- Hero sections
+- Footer
+- Dark background sections
 
-### 12. **Image Optimization - Missing Priority Flags**
-   - **Issue**: Not all above-the-fold images use `priority` prop
-   - **Affected**:
-     - ProductsCarousel: First product image should have `priority`
-     - FeaturedProjectsSection: First project image should have `priority`
-   - **Recommendation**: Add `priority` to first visible images
-
-### 13. **Accessibility - Missing ARIA Labels**
-   - **Issue**: Some interactive elements lack proper ARIA labels
-   - **Examples**:
-     - Product card hover states
-     - Event card buttons
-     - Project card overlay buttons
-   - **Recommendation**: Add descriptive ARIA labels to all interactive elements
-
-### 14. **Form Validation - Error Message Positioning**
-   - **File**: `altair/src/components/sections/FooterCTASection.tsx`
-   - **Issue**: Error messages appear below inputs but may cause layout shift
-   - **Recommendation**: Reserve space for error messages or use absolute positioning
-
-### 15. **Breadcrumbs - Missing Home Icon on Mobile**
-   - **File**: `altair/src/components/ui/breadcrumbs.tsx`
-   - **Issue**: Uses `sr-only md:not-sr-only` which hides "Home" text on mobile
-   - **Line**: 26
-   - **Recommendation**: Keep icon visible, text can be hidden on mobile
-
-### 16. **Product Detail - Image Gallery Thumbnail Size**
-   - **File**: `altair/src/components/pages/products/ProductDetailPage.tsx`
-   - **Issue**: Thumbnails are fixed at `w-24 h-24` which may be too small on large screens
-   - **Line**: 172
-   - **Recommendation**: Make thumbnails responsive: `w-16 h-16 md:w-24 md:h-24`
-
-### 17. **WhyAltairSection - Image Aspect Ratio**
-   - **File**: `altair/src/components/sections/WhyAltairSection.tsx`
-   - **Issue**: Images use `aspect-[4/3] md:h-96` which may cause inconsistent sizing
-   - **Line**: 81
-   - **Recommendation**: Use consistent aspect ratio across all breakpoints
-
-### 18. **ComplianceBlock - Icon Grid Responsiveness**
-   - **File**: `altair/src/components/sections/ComplianceBlock.tsx`
-   - **Issue**: Grid uses `grid-cols-1 sm:grid-cols-2` but may look unbalanced on tablets
-   - **Line**: 21
-   - **Recommendation**: Consider `md:grid-cols-2` for better tablet experience
-
-### 19. **TrustSignalsBar - Logo Container Sizing**
-   - **File**: `altair/src/components/sections/TrustSignalsBar.tsx`
-   - **Issue**: Logo containers use `w-20 h-12 md:w-24 md:h-16` which may not maintain aspect ratio
-   - **Line**: 35
-   - **Recommendation**: Use square containers or maintain consistent aspect ratio
+#### 2.3 Line Height Inconsistencies
+**Location:** Body text across pages
+**Issue:** Inconsistent `leading-*` values for body text
+**Impact:** Reading experience varies across pages
 
 ---
 
-## 🔵 LOW PRIORITY / ENHANCEMENTS
+### 3. **Spacing & Layout Issues**
 
-### 20. **Animation Performance**
-   - **Issue**: Some animations may cause performance issues on low-end devices
-   - **Recommendation**: Add `prefers-reduced-motion` media query support
+#### 3.1 Section Padding Inconsistencies
+**Location:** All pages
+**Issue:** 
+- Most sections use `py-16 md:py-24` but some variations exist
+- Horizontal padding inconsistencies in containers
+**Impact:** Visual rhythm breaks, unprofessional appearance
 
-### 21. **Hover States - Inconsistent Transitions**
-   - **Issue**: Different components use different transition durations
-   - **Examples**:
-     - Product cards: `duration-500`
-     - Buttons: Default (usually 150ms)
-   - **Recommendation**: Standardize transition durations
+#### 3.2 Card Padding Variations
+**Location:** Product cards, project cards, event cards
+**Issue:** Different padding values (`p-4`, `p-6`, `p-8`) used inconsistently
+**Impact:** Cards look mismatched when displayed together
 
-### 22. **Focus States - Inconsistent Styling**
-   - **Issue**: Focus rings use different colors and sizes
-   - **Recommendation**: Create consistent focus ring utility classes
-
-### 23. **Empty States - Missing Illustrations**
-   - **Issue**: Empty states (no products, no events) only show text
-   - **Recommendation**: Add illustrations or icons to empty states
-
-### 24. **Pagination - Page Number Display**
-   - **File**: `altair/src/components/pages/products/ProductsListingPage.tsx`
-   - **Issue**: Pagination shows ellipsis but may be confusing
-   - **Recommendation**: Add tooltips or improve visual indication
-
-### 25. **Product Detail - Technical Specs Table**
-   - **File**: `altair/src/components/pages/products/ProductDetailPage.tsx`
-   - **Issue**: Table uses alternating row colors but may need better visual separation
-   - **Recommendation**: Add subtle borders or improve spacing
-
-### 26. **Events Section - Tab Transition**
-   - **File**: `altair/src/components/sections/EventsSection.tsx`
-   - **Issue**: Tab switching has no transition animation
-   - **Recommendation**: Add fade/slide transition when switching tabs
-
-### 27. **Footer - Link Hover States**
-   - **File**: `altair/src/Footer/Component.tsx`
-   - **Issue**: Footer links have hover states but may need more visual feedback
-   - **Recommendation**: Add underline or color change on hover
-
-### 28. **Header - Mobile Menu Animation**
-   - **File**: `altair/src/Header/Component.client.tsx`
-   - **Issue**: Mobile menu appears/disappears instantly
-   - **Recommendation**: Add slide-down animation
-
-### 29. **Product Cards - Badge Positioning**
-   - **File**: `altair/src/components/ui/product-card.tsx`
-   - **Issue**: Featured and category badges stack vertically which may overlap on small cards
-   - **Line**: 41-47
-   - **Recommendation**: Consider horizontal layout or smaller badges
+#### 3.3 Grid Gap Inconsistencies
+**Location:** Grid layouts across pages
+**Issue:** Gap values vary (`gap-4`, `gap-6`, `gap-8`) without clear system
+**Impact:** Inconsistent spacing between elements
 
 ---
 
-## 📊 SUMMARY STATISTICS
+### 4. **Color & Branding Issues**
 
-- **Total Issues Found**: 29
-- **Critical**: 2
-- **High Priority**: 7
-- **Medium Priority**: 10
-- **Low Priority/Enhancements**: 10
+#### 4.1 Button Color Variations
+**Location:** All pages
+**Issue:**
+- Multiple button variants with similar colors
+- Bronze button shadow may be too prominent
+- Outline button hover states may not be clear enough
+**Impact:** Unclear call-to-action hierarchy
+
+#### 4.2 Background Color Overuse
+**Location:** Multiple sections
+**Issue:**
+- Too many background color changes (`bg-clinical-white`, `bg-light-gray`, `bg-brand-navy`)
+- May create visual noise
+**Impact:** Page feels fragmented, lacks flow
+
+#### 4.3 Badge Color Clarity
+**Location:** Product cards, project cards
+**Issue:** Badge colors may not have enough contrast
+**Impact:** Badges are hard to read
 
 ---
 
-## 🎯 RECOMMENDED FIX ORDER
+## 🟡 MEDIUM PRIORITY ISSUES (Affects Polish & Professionalism)
 
-1. **Fix Critical Issues First** (Issues #1-3)
-2. **Address High Priority Issues** (Issues #4-10)
-3. **Tackle Medium Priority Issues** (Issues #11-20)
-4. **Enhancements** (Issues #21-30)
+### 5. **Component Design Issues**
+
+#### 5.1 Product Card Design
+**Location:** Products listing, homepage carousel
+**Issue:**
+- Image hover scale effect (`group-hover:scale-110`) may be too aggressive
+- Badge positioning may overlap with important content
+- Button text truncation on mobile may hide important info
+**Impact:** Poor mobile experience, visual clutter
+
+#### 5.2 Project Card Hover Effects
+**Location:** Projects listing, homepage
+**Issue:**
+- Hover overlay appears too quickly
+- "View Case Study" button only on hover - not discoverable
+**Impact:** Users may miss important actions
+
+#### 5.3 Event Card Layout
+**Location:** Events section, events listing
+**Issue:**
+- Featured event spans 2 columns but may not be visually distinct enough
+- Date and location info may be too small
+**Impact:** Important event information hard to scan
+
+---
+
+### 6. **Navigation & Header Issues**
+
+#### 6.1 Header Logo Size
+**Location:** Header component
+**Issue:** Logo at `w-20 md:w-[100px]` may still not be optimal
+**Impact:** Brand visibility concerns
+
+#### 6.2 Navigation Spacing
+**Location:** Header navigation
+**Issue:** Gap between nav items (`gap-6`) may be too large or too small
+**Impact:** Navigation feels cramped or spread out
+
+#### 6.3 Mobile Menu Design
+**Location:** Header mobile menu
+**Issue:**
+- Slide animation may be too fast/slow
+- Menu items may need better visual separation
+**Impact:** Mobile navigation UX issues
+
+---
+
+### 7. **Footer Design Issues**
+
+#### 7.1 Footer Column Layout
+**Location:** Footer component
+**Issue:**
+- 4-column layout may be too cramped on tablets
+- Links may be too close together
+**Impact:** Footer hard to use on medium screens
+
+#### 7.2 Footer Text Sizes
+**Location:** Footer component
+**Issue:** All text uses `text-sm` - may be too small for some content
+**Impact:** Readability issues
+
+---
+
+### 8. **Image & Media Issues**
+
+#### 8.1 Image Aspect Ratios
+**Location:** Multiple components
+**Issue:**
+- Some images use `aspect-[4/3]`, others vary
+- Inconsistent aspect ratios create visual chaos
+**Impact:** Grid layouts look messy
+
+#### 8.2 Image Loading States
+**Location:** All image components
+**Issue:** No loading skeletons or placeholders
+**Impact:** Layout shift during image load
+
+#### 8.3 Image Quality
+**Location:** All components using Unsplash
+**Issue:** Using placeholder images - need real product/project images
+**Impact:** Unprofessional appearance
+
+---
+
+### 9. **Animation & Interaction Issues**
+
+#### 9.1 Scroll Reveal Timing
+**Location:** Multiple sections
+**Issue:**
+- Animation delays (`transitionDelay`) may be too fast/slow
+- Some animations trigger too early/late
+**Impact:** Animations feel jarring or miss content
+
+#### 9.2 Hover Transition Speeds
+**Location:** Cards, buttons, links
+**Issue:**
+- Transition durations vary (`duration-300`, `duration-500`, `duration-700`)
+- No consistent timing system
+**Impact:** Interactions feel inconsistent
+
+#### 9.3 Carousel Scroll Behavior
+**Location:** Products carousel
+**Issue:**
+- Scroll amount (`400px`) may be too much/little
+- No visual indicator of scroll position
+**Impact:** Users don't know how much content is left
+
+---
+
+## 🟢 LOW PRIORITY ISSUES (Polish & Enhancement)
+
+### 10. **Micro-interactions**
+
+#### 10.1 Button Click Feedback
+**Location:** All buttons
+**Issue:** No active state styling for button clicks
+**Impact:** Users don't get clear feedback
+
+#### 10.2 Link Hover States
+**Location:** All links
+**Issue:** Some links only change color, others underline - inconsistent
+**Impact:** Unclear what's clickable
+
+#### 10.3 Form Field Focus States
+**Location:** All form inputs
+**Issue:** Focus ring may be too subtle or too prominent
+**Impact:** Accessibility and UX concerns
+
+---
+
+### 11. **Content Presentation**
+
+#### 11.1 Empty States
+**Location:** Filtered lists (products, projects)
+**Issue:** Empty state messages could be more helpful
+**Impact:** Users don't know what to do next
+
+#### 11.2 Loading States
+**Location:** Forms, filters
+**Issue:** Loading indicators may be too small or unclear
+**Impact:** Users don't know if action is processing
+
+#### 11.3 Success/Error Messages
+**Location:** Forms
+**Issue:** 
+- Success messages may disappear too quickly
+- Error message styling may not be prominent enough
+**Impact:** Users miss important feedback
+
+---
+
+### 12. **Responsive Design Issues**
+
+#### 12.1 Breakpoint Consistency
+**Location:** All components
+**Issue:** Some components use `md:`, others use `sm:` or `lg:` inconsistently
+**Impact:** Layout breaks at unexpected screen sizes
+
+#### 12.2 Mobile Typography
+**Location:** All pages
+**Issue:** Text sizes may be too small on mobile devices
+**Impact:** Readability issues on small screens
+
+#### 12.3 Tablet Layout
+**Location:** Grid layouts
+**Issue:** 2-column grids on tablets may be too narrow
+**Impact:** Content feels cramped on tablets
+
+---
+
+## 📋 SUMMARY BY CATEGORY
+
+### Forms (Critical)
+- Remove hover effects from form inputs
+- Fix select dropdown visibility
+- Remove check icon from select items
+- Standardize form field spacing
+
+### Typography (Critical)
+- Standardize heading sizes across pages
+- Fix text color contrast issues
+- Standardize line heights
+
+### Spacing (Critical)
+- Standardize section padding
+- Standardize card padding
+- Create consistent grid gap system
+
+### Colors (Critical)
+- Review button color hierarchy
+- Reduce background color variations
+- Improve badge contrast
+
+### Components (Medium)
+- Refine product card design
+- Improve project card hover states
+- Enhance event card layout
+
+### Navigation (Medium)
+- Optimize header logo size
+- Review navigation spacing
+- Improve mobile menu
+
+### Footer (Medium)
+- Optimize column layout
+- Review text sizes
+
+### Images (Medium)
+- Standardize aspect ratios
+- Add loading states
+- Replace placeholder images
+
+### Animations (Medium)
+- Standardize animation timing
+- Review scroll reveal triggers
+- Improve carousel UX
+
+---
+
+## 🎯 RECOMMENDED ACTION PLAN
+
+### Phase 1: Critical Fixes (Week 1)
+1. Remove form hover effects
+2. Fix select dropdown visibility
+3. Standardize typography system
+4. Fix spacing inconsistencies
+5. Review color contrast
+
+### Phase 2: Component Refinement (Week 2)
+1. Refine card designs
+2. Improve navigation
+3. Optimize footer
+4. Standardize images
+
+### Phase 3: Polish & Enhancement (Week 3)
+1. Refine animations
+2. Improve micro-interactions
+3. Enhance responsive design
+4. Add loading/empty states
 
 ---
 
 ## 📝 NOTES
 
-- Most issues are related to consistency and polish rather than functionality
-- The site is generally well-structured and accessible
-- Focus should be on standardizing spacing, typography, and responsive behavior
-- Consider creating a design system documentation file for future reference
+- All issues should be fixed while maintaining current functionality
+- Design system should be documented after fixes
+- Client feedback should be incorporated throughout
+- Test on multiple devices and browsers after fixes
 
+---
+
+**Last Updated:** [Current Date]
+**Status:** Analysis Complete - Ready for Implementation

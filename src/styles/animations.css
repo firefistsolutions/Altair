@@ -111,6 +111,10 @@
   transform: translateX(50px);
 }
 
+.scroll-reveal-down {
+  transform: translateY(-50px);
+}
+
 /* Smooth Transitions */
 .transition-smooth {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -193,5 +197,70 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Timeline Progress Animation */
+@keyframes timeline-progress {
+  from {
+    height: 0;
+  }
+  to {
+    height: 100%;
+  }
+}
+
+.timeline-progress {
+  animation: timeline-progress 2s ease-out forwards;
+}
+
+/* Button Micro-interactions */
+.button-press {
+  transition: transform 0.1s ease-out;
+}
+
+.button-press:active {
+  transform: scale(0.95);
+}
+
+/* Form Input Focus States */
+.input-focus {
+  transition: all 0.2s ease-out;
+}
+
+.input-focus:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Hover Lift Effect */
+.card-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Scroll Progress Indicator */
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #B8860B, #D4AF37);
+  transform-origin: left;
+  z-index: 9999;
+  animation: scroll-progress linear;
+  animation-timeline: scroll();
 }
 

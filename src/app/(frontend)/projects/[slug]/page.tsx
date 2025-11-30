@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ProjectDetailPage } from '@/components/pages/projects/ProjectDetailPage'
+import { generateProjectSchema } from '@/utilities/seo'
+import { getServerSideURL } from '@/utilities/getURL'
 
 // This will be replaced with proper type from CMS in Phase 6
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Project = {
   slug: string
   title: string
@@ -25,25 +28,6 @@ type Project = {
   outcomes?: string[]
 }
 
-// Schema.org Project structured data
-function generateProjectSchema(project: Project) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Project',
-    name: project.title,
-    description: `Installation of modular operation theatres and medical gas systems at ${project.title}`,
-    image: project.images || [project.image],
-    location: {
-      '@type': 'Place',
-      name: project.location,
-    },
-    startDate: project.year,
-    client: {
-      '@type': 'Organization',
-      name: project.client,
-    },
-  }
-}
 
 // Mock project data - will be replaced with CMS data in Phase 6
 const projects = [
@@ -176,13 +160,35 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
+  const baseUrl = getServerSideURL()
+  const description = `Case study: ${project.title}. ${project.hospitalType} installation completed in ${project.year}. ${project.metrics[0]?.value} ${project.metrics[0]?.label}.`
+
   return {
     title: `${project.title} | Altair Medical System Projects`,
-    description: `Case study: ${project.title}. ${project.hospitalType} installation completed in ${project.year}. ${project.metrics[0]?.value} ${project.metrics[0]?.label}.`,
+    description,
+    keywords: [
+      project.hospitalType,
+      project.location,
+      'modular operation theatre',
+      'medical gas systems',
+      'case study',
+      'hospital installation',
+    ],
     openGraph: {
       title: `${project.title} | Altair Medical System Projects`,
-      description: `Case study: ${project.title}. Installation completed in ${project.year}.`,
+      description,
       images: [project.image],
+      type: 'website',
+      url: `${baseUrl}/projects/${project.slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} | Altair Medical System Projects`,
+      description,
+      images: [project.image],
+    },
+    alternates: {
+      canonical: `${baseUrl}/projects/${project.slug}`,
     },
   }
 }
@@ -195,7 +201,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     notFound()
   }
 
-  const projectSchema = generateProjectSchema(project)
+  const projectSchema = generateProjectSchema({
+    title: project.title,
+    description: `Installation of modular operation theatres and medical gas systems at ${project.title}`,
+    image: project.image,
+    slug: project.slug,
+    client: project.client,
+    location: project.location,
+    year: project.year,
+  })
 
   return (
     <>

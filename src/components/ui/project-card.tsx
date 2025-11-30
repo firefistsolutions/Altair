@@ -30,18 +30,16 @@ export function ProjectCard({
             src={image}
             alt={title}
             fill
-            className="object-cover group-hover:scale-110 transition-transform duration-500"
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, 33vw"
             priority={priority}
+            loading={priority ? undefined : 'lazy'}
+            quality={85}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pb-4 px-4">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end pb-4 px-4">
             <AltairButton variant="bronze" size="sm" className="w-full" aria-label={`View case study for ${title}`}>
               View Case Study
             </AltairButton>
-          </div>
-          {/* Always visible subtle indicator */}
-          <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="w-2 h-2 bg-brand-bronze rounded-full animate-pulse" aria-hidden="true" />
           </div>
         </div>
 

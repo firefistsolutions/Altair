@@ -108,7 +108,7 @@ export function FooterCTASection() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Start Your Project?
           </h2>
-          <p className="text-lg text-white/80 mb-8">
+          <p className="text-lg text-white/90 mb-8 leading-relaxed">
             Get in touch with our team for a consultation and site survey
           </p>
 

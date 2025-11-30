@@ -1,11 +1,14 @@
 'use client'
 
+import { useState, useCallback } from 'react'
 import Image from 'next/image'
 import { SectionContainer } from '@/components/ui/section-container'
 import { AltairCard } from '@/components/ui/altair-card'
-import { AltairBadge } from '@/components/ui/altair-badge'
-import { CheckCircle2, Award, Calendar, MapPin, Target, Users, Shield } from 'lucide-react'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
+import { TimelineProgress } from './TimelineProgress'
+import { JourneyMilestone } from './JourneyMilestone'
+import { Award, MapPin, Target, Users, Shield, TrendingUp, Building2, Globe, Rocket } from 'lucide-react'
+
+const AwardIcon = Award
 
 const values = [
   {
@@ -33,27 +36,63 @@ const certifications = [
 ]
 
 const milestones = [
-  { year: '2024', event: 'Expanded operations across 5 states in India' },
-  { year: '2023', event: 'Completed 50+ successful installations' },
-  { year: '2022', event: 'Achieved ISO 13485 certification' },
-  { year: '2021', event: 'Launched comprehensive AMC/CMC services' },
-  { year: '2020', event: 'Established as leading modular OT manufacturer' },
+  {
+    year: '2020',
+    title: 'Foundation Year',
+    event: 'Established as a leading modular operation theatre manufacturer, beginning our journey to transform healthcare infrastructure',
+    icon: Rocket,
+    highlight: true,
+  },
+  {
+    year: '2021',
+    title: 'Service Expansion',
+    event: 'Launched comprehensive AMC/CMC services, providing ongoing maintenance and support to healthcare facilities',
+    icon: TrendingUp,
+  },
+  {
+    year: '2022',
+    title: 'Quality Certification',
+    event: 'Achieved ISO 13485 certification, reinforcing our commitment to medical device quality management systems',
+    icon: AwardIcon,
+  },
+  {
+    year: '2023',
+    title: 'Milestone Achievements',
+    event: 'Completed 50+ successful installations across government hospitals, private facilities, and medical colleges',
+    icon: Building2,
+  },
+  {
+    year: '2024',
+    title: 'National Expansion',
+    event: 'Expanded operations across 5 states in India, establishing regional presence and strengthening our market leadership',
+    icon: Globe,
+    highlight: true,
+  },
 ]
 
 export function AboutPage() {
+  const [visibleMilestones, setVisibleMilestones] = useState<Set<number>>(new Set())
+
+  const handleMilestoneVisible = useCallback((index: number) => {
+    setVisibleMilestones((prev) => {
+      // Only update if the index is not already in the set
+      if (prev.has(index)) {
+        return prev
+      }
+      const newSet = new Set(prev)
+      newSet.add(index)
+      return newSet
+    })
+  }, [])
+
   return (
     <div className="min-h-screen bg-clinical-white">
-      {/* Breadcrumbs */}
-      <SectionContainer className="pt-6 pb-4">
-        <Breadcrumbs items={[{ label: 'About Us' }]} />
-      </SectionContainer>
-
       {/* Hero Section */}
       <section className="py-16 md:py-24 bg-brand-navy text-white">
         <SectionContainer>
           <div className="max-w-4xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">About Altair Medical System</h1>
-            <p className="text-xl text-white/90 leading-relaxed">
+            <p className="text-xl text-white leading-relaxed">
               Design to Perform. Build to Last. We are a leading manufacturer and installer of modular
               operation theatres and medical gas pipeline systems across India.
             </p>
@@ -95,6 +134,7 @@ export function AboutPage() {
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
+                quality={85}
               />
             </div>
           </div>
@@ -156,30 +196,42 @@ export function AboutPage() {
         </SectionContainer>
       </section>
 
-      {/* Timeline/Milestones */}
-      <section className="py-16 md:py-24 bg-light-gray">
+      {/* Timeline/Milestones - Redesigned */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-light-gray to-clinical-white relative overflow-hidden">
         <SectionContainer>
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-12 text-center">
-              Our Journey
-            </h2>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">Our Journey</h2>
+              <p className="text-lg text-slate-gray max-w-2xl mx-auto">
+                From our foundation in 2020 to becoming a trusted leader in healthcare infrastructure across India
+              </p>
+            </div>
+
             <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-brand-bronze/20 hidden md:block" />
-              
-              <div className="space-y-8">
+              {/* Animated Timeline Line */}
+              <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-bronze/20 via-brand-bronze/30 to-brand-bronze/20 hidden md:block overflow-hidden">
+                <TimelineProgress
+                  totalItems={milestones.length}
+                  activeIndex={visibleMilestones.size > 0 ? Math.max(...Array.from(visibleMilestones)) : -1}
+                />
+              </div>
+
+              {/* Mobile Timeline Line */}
+              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-bronze via-brand-bronze/60 to-brand-bronze/30 md:hidden" />
+
+              <div className="space-y-12 md:space-y-16">
                 {milestones.map((milestone, index) => (
-                  <div key={index} className="relative flex items-start gap-6">
-                    <div className="w-16 h-16 bg-brand-bronze rounded-full flex items-center justify-center flex-shrink-0 z-10">
-                      <Calendar className="w-8 h-8 text-white" aria-hidden="true" />
-                    </div>
-                    <div className="flex-1 pt-2">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-2xl font-bold text-brand-bronze">{milestone.year}</span>
-                      </div>
-                      <p className="text-slate-gray">{milestone.event}</p>
-                    </div>
-                  </div>
+                  <JourneyMilestone
+                    key={index}
+                    year={milestone.year}
+                    title={milestone.title}
+                    event={milestone.event}
+                    icon={milestone.icon}
+                    highlight={milestone.highlight}
+                    isEven={index % 2 === 0}
+                    index={index}
+                    onVisible={handleMilestoneVisible}
+                  />
                 ))}
               </div>
             </div>

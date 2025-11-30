@@ -93,7 +93,7 @@ export function WhyAltairSection() {
                     <CheckCircle2 className="w-6 h-6 text-brand-bronze flex-shrink-0" aria-hidden="true" />
                     <h3 className="text-2xl md:text-3xl font-bold">{prop.title}</h3>
                   </div>
-                  <p className="text-lg text-white/80 leading-relaxed">
+                  <p className="text-lg text-white/90 leading-relaxed">
                     {prop.description}
                   </p>
                 </div>

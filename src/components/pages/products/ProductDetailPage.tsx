@@ -9,7 +9,6 @@ import { AltairButton } from '@/components/ui/altair-button'
 import { AltairBadge } from '@/components/ui/altair-badge'
 import { AltairCard } from '@/components/ui/altair-card'
 import { ProductCard } from '@/components/ui/product-card'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 interface ProductDetailPageProps {
   product: {
@@ -113,15 +112,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
 
   return (
     <div className="min-h-screen bg-clinical-white">
-      {/* Breadcrumbs */}
       <SectionContainer className="pt-6">
-        <Breadcrumbs
-          items={[
-            { label: 'Products', href: '/products' },
-            { label: product.title },
-          ]}
-          className="mb-4"
-        />
         <Link
           href="/products"
           className="inline-flex items-center gap-2 text-brand-navy hover:text-brand-bronze transition-colors focus:outline-none focus:ring-2 focus:ring-brand-bronze rounded"
@@ -409,7 +400,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
         <SectionContainer>
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-            <p className="text-lg text-white/80 mb-6">
+            <p className="text-lg text-white/90 mb-6 leading-relaxed">
               Contact our team for a consultation and customized quote
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -489,6 +480,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
               className="object-contain"
               sizes="100vw"
               priority
+              quality={90}
             />
           </div>
         </div>

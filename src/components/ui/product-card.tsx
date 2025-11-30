@@ -37,14 +37,16 @@ export function ProductCard({
           src={image}
           alt={title}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-300"
+          className="object-cover group-hover:scale-105 transition-transform duration-300"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           priority={priority}
+          loading={priority ? undefined : 'lazy'}
+          quality={85}
         />
         <div className="absolute top-4 right-4 flex flex-wrap gap-2 items-start justify-end max-w-[60%]">
           {featured && <AltairBadge variant="bronze" size="sm">Featured</AltairBadge>}
           {category && (
-            <AltairBadge variant="outline" size="sm" className="bg-white/90">
+            <AltairBadge variant="outline" size="sm" className="bg-white/95 backdrop-blur-sm">
               {category}
             </AltairBadge>
           )}

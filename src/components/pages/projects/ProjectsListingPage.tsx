@@ -214,7 +214,7 @@ export function ProjectsListingPage() {
         <SectionContainer>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Projects</h1>
-            <p className="text-lg text-white/80">
+            <p className="text-lg text-white/90 leading-relaxed">
               Showcasing successful installations of modular operation theatres and medical gas systems
               across India. From government hospitals to private healthcare facilities.
             </p>
@@ -223,7 +223,7 @@ export function ProjectsListingPage() {
       </section>
 
       {/* Filters and Search Bar */}
-      <section className="border-b border-border-gray bg-white sticky top-[73px] md:top-24 z-30">
+      <section className="border-b border-border-gray bg-white relative">
         <SectionContainer>
           <div className="py-4">
             {/* Mobile Filter Toggle */}

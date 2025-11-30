@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import { AboutPage } from '@/components/pages/about/AboutPage'
+import { getServerSideURL } from '@/utilities/getURL'
+
+const baseUrl = getServerSideURL()
 
 export const metadata: Metadata = {
   title: 'About Us | Altair Medical System',
@@ -16,6 +19,15 @@ export const metadata: Metadata = {
     title: 'About Us | Altair Medical System',
     description: 'Expert engineering and installation of modular operation theatres and medical gas systems across India.',
     type: 'website',
+    url: `${baseUrl}/about`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About Us | Altair Medical System',
+    description: 'Expert engineering and installation of modular operation theatres and medical gas systems across India.',
+  },
+  alternates: {
+    canonical: `${baseUrl}/about`,
   },
 }
 

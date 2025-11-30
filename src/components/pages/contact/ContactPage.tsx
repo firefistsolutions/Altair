@@ -9,7 +9,6 @@ import { AltairButton } from '@/components/ui/altair-button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { CheckCircle2, AlertCircle, Loader2, Mail, Phone, MapPin, Clock, MessageCircle } from 'lucide-react'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 interface FormErrors {
   name?: string
@@ -104,17 +103,12 @@ export function ContactPage() {
 
   return (
     <div className="min-h-screen bg-clinical-white">
-      {/* Breadcrumbs */}
-      <SectionContainer className="pt-6 pb-4">
-        <Breadcrumbs items={[{ label: 'Contact Us' }]} />
-      </SectionContainer>
-
       {/* Hero Section */}
       <section className="py-16 md:py-24 bg-brand-navy text-white">
         <SectionContainer>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-            <p className="text-lg text-white/80">
+            <p className="text-lg text-white/90 leading-relaxed">
               Get in touch with our team for consultations, site surveys, and project inquiries. We&apos;re
               here to help you with your healthcare infrastructure needs.
             </p>

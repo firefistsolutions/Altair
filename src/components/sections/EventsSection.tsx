@@ -87,7 +87,7 @@ export function EventsSection() {
       <SectionContainer>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Events</h2>
-          <p className="text-lg text-white/80 max-w-2xl mx-auto">
+          <p className="text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
             Join us at leading medical technology exhibitions and conferences
           </p>
         </div>

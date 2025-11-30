@@ -11,6 +11,10 @@ import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { FooterCTASection } from '@/components/sections/FooterCTASection'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 
+import { getServerSideURL } from '@/utilities/getURL'
+
+const baseUrl = getServerSideURL()
+
 export const metadata: Metadata = {
   title: 'Altair Medical System | Modular Operation Theatres & Medical Gas Systems',
   description: 'Design to Perform. Build to Last. Expert engineering and installation of modular operation theatres and medical gas pipeline systems. HTM & ASTM compliant solutions across India.',
@@ -23,12 +27,15 @@ export const metadata: Metadata = {
     'ASTM certified',
     'medical gas pipeline',
     'operation theater installation',
+    'India',
   ],
   openGraph: {
     title: 'Altair Medical System | Modular Operation Theatres & Medical Gas Systems',
     description: 'Design to Perform. Build to Last. Expert engineering and installation of modular operation theatres and medical gas pipeline systems.',
     type: 'website',
     locale: 'en_IN',
+    url: baseUrl,
+    siteName: 'Altair Medical System',
   },
   twitter: {
     card: 'summary_large_image',
@@ -39,11 +46,14 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: baseUrl,
+  },
 }
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <ErrorBoundary>
         <HeroSection />
       </ErrorBoundary>
@@ -74,6 +84,6 @@ export default function HomePage() {
       <ErrorBoundary>
         <FooterCTASection />
       </ErrorBoundary>
-    </main>
+    </>
   )
 }

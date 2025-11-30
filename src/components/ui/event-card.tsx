@@ -46,8 +46,10 @@ export function EventCard({
           src={image}
           alt={title}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-500"
+          className="object-cover group-hover:scale-105 transition-transform duration-300"
           sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
+          loading="lazy"
+          quality={85}
         />
         <div className="absolute top-4 right-4 z-10">
           <AltairBadge variant="bronze">{eventType}</AltairBadge>

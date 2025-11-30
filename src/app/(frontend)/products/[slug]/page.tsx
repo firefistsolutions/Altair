@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ProductDetailPage } from '@/components/pages/products/ProductDetailPage'
+import { generateProductSchema } from '@/utilities/seo'
+import { getServerSideURL } from '@/utilities/getURL'
 
 // This will be replaced with proper type from CMS in Phase 6
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Product = {
   slug: string
   title: string
@@ -15,26 +18,6 @@ type Product = {
   datasheetUrl?: string
 }
 
-// Schema.org Product structured data
-function generateProductSchema(product: Product) {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: product.title,
-    description: product.description,
-    image: product.images || [product.image],
-    category: product.category,
-    brand: {
-      '@type': 'Brand',
-      name: 'Altair Medical System',
-    },
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      priceCurrency: 'INR',
-    },
-  }
-}
 
 // Mock product data - will be replaced with CMS data in Phase 6
 const products = [
@@ -65,13 +48,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
+  const baseUrl = getServerSideURL()
+
   return {
     title: `${product.title} | Altair Medical System`,
     description: product.description,
+    keywords: [product.category, product.title, 'HTM-02-01', 'ASTM certified', 'medical equipment'],
     openGraph: {
       title: `${product.title} | Altair Medical System`,
       description: product.description,
       images: [product.image],
+      type: 'website',
+      url: `${baseUrl}/products/${product.slug}`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.title} | Altair Medical System`,
+      description: product.description,
+      images: [product.image],
+    },
+    alternates: {
+      canonical: `${baseUrl}/products/${product.slug}`,
     },
   }
 }
@@ -84,7 +81,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     notFound()
   }
 
-  const productSchema = generateProductSchema(product)
+  const productSchema = generateProductSchema({
+    title: product.title,
+    description: product.description,
+    image: product.image,
+    slug: product.slug,
+    category: product.category,
+    specs: product.specs,
+  })
 
   return (
     <>

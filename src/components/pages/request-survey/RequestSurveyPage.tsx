@@ -7,7 +7,6 @@ import { AltairButton } from '@/components/ui/altair-button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { CheckCircle2, AlertCircle, Loader2, Calendar, MapPin } from 'lucide-react'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 interface FormErrors {
   name?: string
@@ -138,17 +137,12 @@ export function RequestSurveyPage() {
 
   return (
     <div className="min-h-screen bg-clinical-white">
-      {/* Breadcrumbs */}
-      <SectionContainer className="pt-6 pb-4">
-        <Breadcrumbs items={[{ label: 'Request a Site Survey' }]} />
-      </SectionContainer>
-
       {/* Hero Section */}
       <section className="py-16 md:py-24 bg-brand-navy text-white">
         <SectionContainer>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Request a Site Survey</h1>
-            <p className="text-lg text-white/80">
+            <p className="text-lg text-white/90 leading-relaxed">
               Schedule a site survey with our expert team. We&apos;ll visit your facility, assess your
               requirements, and provide detailed recommendations for your modular operation theatre or medical
               gas system project.

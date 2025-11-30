@@ -91,8 +91,30 @@
   * {
     @apply border-border;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+  }
+  
+  /* Accessibility: Focus visible styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-bronze ring-offset-2;
+  }
+  
+  /* Skip link focus state */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-brand-bronze ring-offset-2;
+  }
+  
+  /* Ensure main content is focusable for skip link */
+  main:focus {
+    outline: none;
   }
   
   /* Respect user's motion preferences */

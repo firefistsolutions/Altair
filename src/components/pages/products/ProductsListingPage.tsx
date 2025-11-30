@@ -191,7 +191,7 @@ export function ProductsListingPage() {
         <SectionContainer>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Product Range</h1>
-            <p className="text-lg text-white/80">
+            <p className="text-lg text-white/90 leading-relaxed">
               Comprehensive solutions for modern healthcare infrastructure. All products comply with
               HTM-02-01 and ASTM standards.
             </p>
@@ -199,8 +199,8 @@ export function ProductsListingPage() {
         </SectionContainer>
       </section>
 
-          {/* Filters and Search Bar */}
-          <section className="border-b border-border-gray bg-white sticky top-[73px] md:top-24 z-30">
+      {/* Filters and Search Bar */}
+      <section className="border-b border-border-gray bg-white relative">
         <SectionContainer>
           <div className="py-4">
             {/* Mobile Filter Toggle */}

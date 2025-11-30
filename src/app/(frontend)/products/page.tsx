@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { ProductsListingPage } from '@/components/pages/products/ProductsListingPage'
 import { Loader2 } from 'lucide-react'
+import { getServerSideURL } from '@/utilities/getURL'
 
 // Schema.org ItemList for products page
 function generateProductsListSchema() {
@@ -39,6 +40,8 @@ function generateProductsListSchema() {
   }
 }
 
+const baseUrl = getServerSideURL()
+
 export const metadata: Metadata = {
   title: 'Products | Altair Medical System',
   description: 'Browse our comprehensive range of modular operation theatres, medical gas systems, surgical pendants, bed-head units, and more. HTM & ASTM compliant solutions.',
@@ -55,6 +58,15 @@ export const metadata: Metadata = {
     title: 'Products | Altair Medical System',
     description: 'Browse our comprehensive range of modular operation theatres and medical gas systems.',
     type: 'website',
+    url: `${baseUrl}/products`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Products | Altair Medical System',
+    description: 'Browse our comprehensive range of modular operation theatres and medical gas systems.',
+  },
+  alternates: {
+    canonical: `${baseUrl}/products`,
   },
 }
 

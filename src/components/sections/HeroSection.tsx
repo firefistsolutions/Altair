@@ -30,6 +30,8 @@ export function HeroSection() {
         fill
         className="object-cover"
         priority
+        quality={90}
+        sizes="100vw"
         role="presentation"
         aria-hidden="true"
       />
@@ -40,13 +42,13 @@ export function HeroSection() {
       {/* Content */}
       <SectionContainer className="relative z-10 text-center text-white">
         <div className={`max-w-4xl mx-auto space-y-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
             Modular Operation Theatres & Medical Gas Systems
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-white max-w-2xl mx-auto leading-relaxed">
             Designed to Perform. Built to Last.
           </p>
-          <p className="text-lg text-white/80 max-w-xl mx-auto">
+          <p className="text-lg text-white/90 max-w-xl mx-auto leading-relaxed">
             Turnkey design • Manufacturing • Installation • AMC / CMC • HTM & ASTM compliant
           </p>
           

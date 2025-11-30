@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { ProjectsListingPage } from '@/components/pages/projects/ProjectsListingPage'
 import { Loader2 } from 'lucide-react'
+import { getServerSideURL } from '@/utilities/getURL'
 
 // Schema.org ItemList for projects page
 function generateProjectsListSchema() {
@@ -33,6 +34,8 @@ function generateProjectsListSchema() {
   }
 }
 
+const baseUrl = getServerSideURL()
+
 export const metadata: Metadata = {
   title: 'Projects | Altair Medical System',
   description: 'Explore our successful installations of modular operation theatres and medical gas systems across India. Government hospitals, private healthcare facilities, and medical colleges.',
@@ -47,6 +50,15 @@ export const metadata: Metadata = {
     title: 'Projects | Altair Medical System',
     description: 'Explore our successful installations of modular operation theatres and medical gas systems across India.',
     type: 'website',
+    url: `${baseUrl}/projects`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Projects | Altair Medical System',
+    description: 'Explore our successful installations of modular operation theatres and medical gas systems across India.',
+  },
+  alternates: {
+    canonical: `${baseUrl}/projects`,
   },
 }
 

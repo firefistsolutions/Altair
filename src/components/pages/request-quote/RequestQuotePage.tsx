@@ -7,7 +7,6 @@ import { AltairButton } from '@/components/ui/altair-button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { CheckCircle2, AlertCircle, Loader2, Upload, X } from 'lucide-react'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 interface FormErrors {
   name?: string
@@ -158,17 +157,12 @@ export function RequestQuotePage() {
 
   return (
     <div className="min-h-screen bg-clinical-white">
-      {/* Breadcrumbs */}
-      <SectionContainer className="pt-6 pb-4">
-        <Breadcrumbs items={[{ label: 'Request a Quote' }]} />
-      </SectionContainer>
-
       {/* Hero Section */}
       <section className="py-16 md:py-24 bg-brand-navy text-white">
         <SectionContainer>
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Request a Quote</h1>
-            <p className="text-lg text-white/80">
+            <p className="text-lg text-white/90 leading-relaxed">
               Get a customized quote for your modular operation theatre or medical gas system project. Fill
               out the form below and our team will get back to you with detailed pricing and specifications.
             </p>

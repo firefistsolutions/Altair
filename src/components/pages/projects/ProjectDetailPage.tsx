@@ -9,7 +9,6 @@ import { AltairButton } from '@/components/ui/altair-button'
 import { AltairBadge } from '@/components/ui/altair-badge'
 import { AltairCard } from '@/components/ui/altair-card'
 import { ProjectCard } from '@/components/ui/project-card'
-import { Breadcrumbs } from '@/components/ui/breadcrumbs'
 
 interface ProjectDetailPageProps {
   project: {
@@ -95,15 +94,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
 
   return (
     <div className="min-h-screen bg-clinical-white">
-      {/* Breadcrumbs */}
       <SectionContainer className="pt-6">
-        <Breadcrumbs
-          items={[
-            { label: 'Projects', href: '/projects' },
-            { label: project.title },
-          ]}
-          className="mb-4"
-        />
         <Link
           href="/projects"
           className="inline-flex items-center gap-2 text-brand-navy hover:text-brand-bronze transition-colors focus:outline-none focus:ring-2 focus:ring-brand-bronze rounded"
@@ -160,7 +151,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
             {project.metrics.map((metric, index) => (
               <div key={index} className="text-center">
                 <p className="text-3xl md:text-4xl font-bold text-brand-bronze mb-2">{metric.value}</p>
-                <p className="text-sm md:text-base text-white/80">{metric.label}</p>
+                <p className="text-sm md:text-base text-white/90">{metric.label}</p>
               </div>
             ))}
           </div>
@@ -329,7 +320,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
         <SectionContainer>
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
-            <p className="text-lg text-white/80 mb-6">
+            <p className="text-lg text-white/90 mb-6 leading-relaxed">
               Contact our team for a consultation and site survey
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -409,6 +400,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
               className="object-contain"
               sizes="100vw"
               priority
+              quality={90}
             />
           </div>
         </div>
