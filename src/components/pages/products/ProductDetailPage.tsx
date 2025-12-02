@@ -10,6 +10,7 @@ import { AltairBadge } from '@/components/ui/altair-badge'
 import { AltairCard } from '@/components/ui/altair-card'
 import { ProductCard } from '@/components/ui/product-card'
 import RichText from '@/components/RichText'
+import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 
 import type { TransformedProduct } from '@/lib/utils/transform-product'
 
@@ -205,11 +206,15 @@ export function ProductDetailPage({ product, relatedProducts = [] }: ProductDeta
             <h2 className="text-3xl font-bold text-brand-navy mb-6">Overview</h2>
             <div className="prose prose-lg max-w-none prose-headings:text-brand-navy prose-headings:font-bold prose-p:text-slate-gray prose-p:leading-relaxed prose-a:text-brand-bronze prose-a:no-underline hover:prose-a:underline">
               {product.overview ? (
-                <RichText 
-                  data={product.overview} 
-                  enableGutter={false}
-                  className="text-slate-gray"
-                />
+                typeof product.overview === 'string' ? (
+                  <p className="text-slate-gray leading-relaxed">{product.overview}</p>
+                ) : (
+                  <RichText 
+                    data={product.overview as DefaultTypedEditorState} 
+                    enableGutter={false}
+                    className="text-slate-gray"
+                  />
+                )
               ) : (
                 <p className="text-slate-gray leading-relaxed">
                   {product.description}
@@ -225,7 +230,7 @@ export function ProductDetailPage({ product, relatedProducts = [] }: ProductDeta
         <SectionContainer>
           <h2 className="text-3xl font-bold text-brand-navy mb-8 text-center">Key Features</h2>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {(Array.isArray(features) ? features : []).map((feature: any, index: number) => (
+            {(Array.isArray(features) ? features : []).map((feature: string, index: number) => (
               <div key={index} className="flex items-start gap-3">
                 <CheckCircle2 className="w-6 h-6 text-brand-bronze flex-shrink-0 mt-0.5" />
                 <p className="text-slate-gray">{feature}</p>

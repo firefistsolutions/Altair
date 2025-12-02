@@ -36,7 +36,11 @@ export async function getProducts(filters: ProductFilters = {}): Promise<Product
     sort = '-createdAt',
   } = filters
 
-  const where: any = {
+  const where: {
+    _status: { equals: 'published' }
+    category?: { equals: string }
+    featured?: { equals: boolean }
+  } = {
     _status: {
       equals: 'published',
     },

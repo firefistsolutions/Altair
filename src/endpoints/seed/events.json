@@ -1,0 +1,159 @@
+[
+  {
+    "title": "Medical Equipment Expo 2025 - Mumbai",
+    "slug": "medical-equipment-expo-2025-mumbai",
+    "eventType": "expo",
+    "startDate": "2025-03-15T09:00:00.000Z",
+    "endDate": "2025-03-17T18:00:00.000Z",
+    "location": "Mumbai",
+    "venue": "Bombay Exhibition Center",
+    "venueAddress": "NSE Complex, Goregaon (E), Mumbai, Maharashtra 400063",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Join us at the Medical Equipment Expo 2025 in Mumbai, where we'll be showcasing our latest range of surgical pendants, modular operation theatres, and medical gas systems. Visit our booth to see live demonstrations, meet our technical team, and learn about our innovative solutions for healthcare infrastructure.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          },
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "We'll be featuring our new surgical pendant models, demonstrating installation processes, and discussing compliance standards. Don't miss this opportunity to explore cutting-edge medical equipment solutions.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "eventStatus": "upcoming",
+    "registrationLink": "https://example.com/register",
+    "featured": true,
+    "meta": {
+      "title": "Medical Equipment Expo 2025 Mumbai | Altair Medical System",
+      "description": "Join Altair Medical System at Medical Equipment Expo 2025 in Mumbai. See our latest surgical pendants and medical gas systems. March 15-17, 2025."
+    }
+  },
+  {
+    "title": "Healthcare Infrastructure Conference 2024",
+    "slug": "healthcare-infrastructure-conference-2024",
+    "eventType": "conference",
+    "startDate": "2024-11-20T09:00:00.000Z",
+    "endDate": "2024-11-22T17:00:00.000Z",
+    "location": "Delhi",
+    "venue": "India Habitat Centre",
+    "venueAddress": "Lodhi Road, New Delhi, Delhi 110003",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Attended the Healthcare Infrastructure Conference 2024 in Delhi, where we presented on 'Modern Medical Gas Systems: Compliance and Best Practices'. The conference brought together healthcare administrators, facility managers, and medical equipment manufacturers to discuss the latest trends in hospital infrastructure.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "eventStatus": "past",
+    "featured": false,
+    "meta": {
+      "title": "Healthcare Infrastructure Conference 2024 | Altair Medical System",
+      "description": "Altair Medical System presented at Healthcare Infrastructure Conference 2024 in Delhi on modern medical gas systems and compliance."
+    }
+  },
+  {
+    "title": "Surgical Pendant Technology Workshop",
+    "slug": "surgical-pendant-technology-workshop",
+    "eventType": "workshop",
+    "startDate": "2025-02-10T10:00:00.000Z",
+    "endDate": "2025-02-10T16:00:00.000Z",
+    "location": "Pune",
+    "venue": "Pune Medical College",
+    "venueAddress": "Pune, Maharashtra",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Join us for a hands-on workshop on surgical pendant technology, installation, and maintenance. This workshop is designed for hospital engineers, facility managers, and medical equipment technicians. Learn about HTM-02-01 compliance, best practices for installation, and maintenance procedures.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "eventStatus": "upcoming",
+    "registrationLink": "https://example.com/workshop-register",
+    "featured": false,
+    "meta": {
+      "title": "Surgical Pendant Technology Workshop | Altair Medical System",
+      "description": "Hands-on workshop on surgical pendant technology, installation, and maintenance. February 10, 2025 in Pune."
+    }
+  }
+]
+
+

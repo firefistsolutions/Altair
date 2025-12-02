@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { logger } from '@/lib/logger'
 
 // Validation schema for contact form
 const contactFormSchema = z.object({
@@ -94,9 +95,10 @@ export async function POST(req: NextRequest) {
             Phone: +91 92518 59361</p>
           `,
         })
-      } catch (emailError: any) {
+      } catch (emailError: unknown) {
         // Log email error but don't fail the request
-        console.error('Email notification failed:', emailError.message)
+        const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown error'
+        logger.error('Email notification failed:', errorMessage)
       }
     }
 
@@ -105,13 +107,14 @@ export async function POST(req: NextRequest) {
       message: 'Thank you for your message. We will get back to you soon.',
       leadId: lead.id,
     })
-  } catch (error: any) {
-    console.error('Contact form submission error:', error)
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    logger.error('Contact form submission error:', errorMessage)
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to submit form. Please try again later.',
-        message: error.message,
+        message: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
       },
       { status: 500 }
     )

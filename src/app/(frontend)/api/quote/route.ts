@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { logger } from '@/lib/logger'
 
 // Validation schema for quote request form
 const quoteFormSchema = z.object({
@@ -96,13 +97,14 @@ export async function POST(req: NextRequest) {
         })
 
         floorPlanMediaId = media.id
-      } catch (fileError: any) {
-        console.error('File upload error:', fileError)
+      } catch (fileError: unknown) {
+        const errorMessage = fileError instanceof Error ? fileError.message : 'Unknown error'
+        logger.error('File upload error:', errorMessage)
         return NextResponse.json(
           {
             success: false,
             error: 'Failed to upload file. Please try again.',
-            message: fileError.message,
+            message: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
           },
           { status: 500 }
         )
@@ -175,9 +177,10 @@ export async function POST(req: NextRequest) {
             Phone: +91 92518 59361</p>
           `,
         })
-      } catch (emailError: any) {
+      } catch (emailError: unknown) {
         // Log email error but don't fail the request
-        console.error('Email notification failed:', emailError.message)
+        const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown error'
+        logger.error('Email notification failed:', errorMessage)
       }
     }
 
@@ -187,13 +190,14 @@ export async function POST(req: NextRequest) {
       leadId: lead.id,
       floorPlanUploaded: !!floorPlanMediaId,
     })
-  } catch (error: any) {
-    console.error('Quote request submission error:', error)
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    logger.error('Quote request submission error:', errorMessage)
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to submit quote request. Please try again later.',
-        message: error.message,
+        message: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
       },
       { status: 500 }
     )

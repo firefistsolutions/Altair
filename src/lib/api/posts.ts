@@ -36,7 +36,11 @@ export async function getPosts(filters: PostFilters = {}): Promise<PostsResponse
     sort = '-publishedAt',
   } = filters
 
-  const where: any = {
+  const where: {
+    _status: { equals: 'published' }
+    categories?: { contains: string | number }
+    featured?: { equals: boolean }
+  } = {
     _status: {
       equals: 'published',
     },

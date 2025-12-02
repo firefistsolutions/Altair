@@ -19,6 +19,10 @@
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "seed-admin": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/seed-admin.ts",
     "seed-products": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/seed-products.ts",
+    "seed-projects": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/seed-projects.ts",
+    "seed-events": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/seed-events.ts",
+    "seed-posts": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/seed-posts.ts",
+    "seed-all": "pnpm seed-products && pnpm seed-projects && pnpm seed-events && pnpm seed-posts",
     "extract-pdf-products": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/extract-pdf-products.ts",
     "fix-enum": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/fix-enum-conflict.ts",
     "fix-locked-docs": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/fix-locked-documents.ts",
@@ -28,7 +32,8 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --no-experimental-strip-types\" pnpm exec playwright test --config=playwright.config.ts",
-    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
+    "performance-audit": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/performance-audit.ts"
   },
   "dependencies": {
     "@payloadcms/admin-bar": "3.64.0",

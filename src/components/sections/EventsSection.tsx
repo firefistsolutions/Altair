@@ -148,7 +148,7 @@ export function EventsSection({
                 dateRange={formatDateRange(event.startDate, event.endDate)}
                 location={event.location}
                 venue={event.venue || event.location}
-                description={event.description}
+                description={typeof event.description === 'string' ? event.description : undefined}
                 eventType={event.eventType}
                 featured={event.featured}
                 slug={event.slug}

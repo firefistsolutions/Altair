@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { logger } from '@/lib/logger'
 
 // Validation schema for survey request form
 const surveyFormSchema = z.object({
@@ -128,9 +129,10 @@ export async function POST(req: NextRequest) {
             Phone: +91 92518 59361</p>
           `,
         })
-      } catch (emailError: any) {
+      } catch (emailError: unknown) {
         // Log email error but don't fail the request
-        console.error('Email notification failed:', emailError.message)
+        const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown error'
+        logger.error('Email notification failed:', errorMessage)
       }
     }
 
@@ -139,13 +141,14 @@ export async function POST(req: NextRequest) {
       message: 'Survey request submitted successfully. We will contact you soon to schedule the survey.',
       leadId: lead.id,
     })
-  } catch (error: any) {
-    console.error('Survey request submission error:', error)
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    logger.error('Survey request submission error:', errorMessage)
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to submit survey request. Please try again later.',
-        message: error.message,
+        message: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
       },
       { status: 500 }
     )

@@ -4,7 +4,16 @@ import { ProjectDetailPage } from '@/components/pages/projects/ProjectDetailPage
 import { generateProjectSchema } from '@/utilities/seo'
 import { getServerSideURL } from '@/utilities/getURL'
 import { getProjectBySlug, getProjects } from '@/lib/api/projects'
-import { transformProject } from '@/lib/utils/transform-project'
+import { transformProject, type TransformedProject } from '@/lib/utils/transform-project'
+
+interface LexicalRoot {
+  root?: {
+    text?: string
+    children?: unknown[]
+    [key: string]: unknown
+  }
+  [key: string]: unknown
+}
 
 export const dynamic = 'force-static'
 export const revalidate = 3600 // Revalidate every hour
@@ -96,7 +105,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
       />
-      <ProjectDetailPage project={transformed} relatedProjects={relatedProjects} />
+      <ProjectDetailPage 
+        project={transformed as TransformedProject & {
+          challenge?: string | LexicalRoot
+          solution?: string | LexicalRoot
+          products?: string[]
+          testimonial?: {
+            quote: string
+            author: string
+            designation: string
+            organization: string
+          }
+          outcomes?: string[]
+        }}
+        relatedProjects={relatedProjects} 
+      />
     </>
   )
 }

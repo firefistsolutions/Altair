@@ -195,7 +195,9 @@ export function EventDetailPage({ event, relatedEvents = [] }: EventDetailPagePr
                           {relatedEvent.title}
                         </h3>
                         <p className="text-sm text-slate-gray mb-3 line-clamp-2 leading-relaxed">
-                          {relatedEvent.description}
+                          {typeof relatedEvent.description === 'string' 
+                            ? relatedEvent.description 
+                            : ''}
                         </p>
                         <div className="flex items-center gap-2 text-xs text-slate-gray mt-auto">
                           <MapPin className="w-3 h-3" />

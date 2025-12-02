@@ -1,6 +1,18 @@
 import type { Project, Media } from '@/payload-types'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 
+// RichText Lexical format type
+interface LexicalNode {
+  text?: string
+  children?: LexicalNode[]
+  [key: string]: unknown
+}
+
+interface LexicalRoot {
+  root?: LexicalNode
+  [key: string]: unknown
+}
+
 export interface TransformedProject {
   id: string
   title: string
@@ -12,8 +24,8 @@ export interface TransformedProject {
   hospitalType: string
   year: string
   location: string
-  challenge?: any // RichText
-  solution?: any // RichText
+  challenge?: LexicalRoot | string // RichText
+  solution?: LexicalRoot | string // RichText
   productsUsed?: string[]
   testimonial?: {
     quote: string
@@ -21,7 +33,7 @@ export interface TransformedProject {
     designation: string
     organization: string
   }
-  outcomes?: any // RichText
+  outcomes?: LexicalRoot | string // RichText
   metaTitle?: string
   metaDescription?: string
   metaImage?: string

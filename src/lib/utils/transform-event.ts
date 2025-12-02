@@ -2,6 +2,18 @@ import type { Event, Media } from '@/payload-types'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 // Using native Date methods instead of date-fns
 
+// RichText Lexical format type
+interface LexicalNode {
+  text?: string
+  children?: LexicalNode[]
+  [key: string]: unknown
+}
+
+interface LexicalRoot {
+  root?: LexicalNode
+  [key: string]: unknown
+}
+
 export interface TransformedEvent {
   id: string
   title: string
@@ -12,7 +24,7 @@ export interface TransformedEvent {
   location: string
   venue?: string
   venueAddress?: string
-  description?: any // RichText
+  description?: LexicalRoot | string // RichText
   image: string
   galleryImages: string[]
   eventType: string

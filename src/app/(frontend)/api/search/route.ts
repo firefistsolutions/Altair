@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import { z } from 'zod'
+import { logger } from '@/lib/logger'
 
 const searchSchema = z.object({
   query: z.string().min(1, 'Search query is required'),
@@ -28,12 +29,23 @@ export async function GET(req: NextRequest) {
     })
 
     const searchQuery = validated.query.toLowerCase().trim()
+    
+    interface SearchResultItem {
+      id: string | number
+      title: string
+      slug: string
+      description?: string
+      image?: string | { url?: string | null } | null
+      category?: string
+      [key: string]: unknown
+    }
+    
     const results: {
-      products: any[]
-      projects: any[]
-      events: any[]
-      posts: any[]
-      resources: any[]
+      products: SearchResultItem[]
+      projects: SearchResultItem[]
+      events: SearchResultItem[]
+      posts: SearchResultItem[]
+      resources: SearchResultItem[]
     } = {
       products: [],
       projects: [],
@@ -93,7 +105,9 @@ export async function GET(req: NextRequest) {
           title: product.title || '',
           description: description.substring(0, 200), // Limit length
           slug: product.slug || '',
-          image: typeof product.image === 'object' && product.image !== null ? product.image : null,
+          image: typeof product.image === 'object' && product.image !== null 
+            ? { url: product.image.url || null }
+            : null,
           category: typeof product.category === 'string' ? product.category : '',
         }
       })
@@ -150,7 +164,9 @@ export async function GET(req: NextRequest) {
           title: project.title || '',
           description: description.substring(0, 200), // Limit length
           slug: project.slug || '',
-          image: typeof project.image === 'object' && project.image !== null ? project.image : null,
+          image: typeof project.image === 'object' && project.image !== null 
+            ? { url: project.image.url || null }
+            : null,
           client: typeof project.client === 'string' ? project.client : '',
           location: typeof project.location === 'string' ? project.location : '',
           year: project.year || 0,
@@ -200,7 +216,11 @@ export async function GET(req: NextRequest) {
         title: event.title,
         description: '',
         slug: event.slug,
-        image: event.featuredImage,
+        image: typeof event.featuredImage === 'object' && event.featuredImage !== null
+          ? { url: event.featuredImage.url || null }
+          : typeof event.featuredImage === 'number'
+          ? null
+          : null,
         location: event.location,
         startDate: event.startDate,
         eventType: event.eventType,
@@ -244,7 +264,9 @@ export async function GET(req: NextRequest) {
         title: post.title,
         description: typeof post.content === 'object' ? JSON.stringify(post.content).substring(0, 200) : '',
         slug: post.slug,
-        image: typeof post.heroImage === 'object' && post.heroImage !== null ? post.heroImage : null,
+        image: typeof post.heroImage === 'object' && post.heroImage !== null
+          ? { url: post.heroImage.url || null }
+          : null,
         publishedAt: post.publishedAt,
       }))
     }
@@ -284,9 +306,13 @@ export async function GET(req: NextRequest) {
         id: resource.id,
         type: 'resource',
         title: resource.title,
-        description: resource.description,
+        description: resource.description || undefined,
         slug: resource.slug,
-        image: resource.thumbnail,
+        image: typeof resource.thumbnail === 'object' && resource.thumbnail !== null
+          ? { url: resource.thumbnail.url || null }
+          : typeof resource.thumbnail === 'number'
+          ? null
+          : null,
         category: resource.category,
       }))
     }
@@ -307,12 +333,19 @@ export async function GET(req: NextRequest) {
       limit: validated.limit,
       page: validated.page,
     })
-  } catch (error: any) {
-    console.error('Search API error:', error)
+  } catch (error: unknown) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues, message: 'Validation failed' }, { status: 400 })
     }
-    return NextResponse.json({ error: 'Internal Server Error', message: error.message }, { status: 500 })
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    logger.error('Search API error:', errorMessage)
+    return NextResponse.json(
+      { 
+        error: 'Internal Server Error', 
+        message: process.env.NODE_ENV === 'development' ? errorMessage : undefined 
+      }, 
+      { status: 500 }
+    )
   }
 }
 

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Search, Loader2, Package, Building2, Calendar, FileText, BookOpen, X } from 'lucide-react'
+import { Search, Loader2, Package, Building2, Calendar, FileText, BookOpen } from 'lucide-react'
 import { SectionContainer } from '@/components/ui/section-container'
 import { AltairCard } from '@/components/ui/altair-card'
 import { AltairButton } from '@/components/ui/altair-button'
@@ -18,7 +18,7 @@ interface SearchResult {
   title: string
   description?: string
   slug: string
-  image?: any
+  image?: string | { url?: string } | null
   category?: string
   client?: string
   location?: string
@@ -31,7 +31,7 @@ interface SearchResult {
 interface SearchResultsPageProps {
   initialQuery?: string
   initialType?: string
-  initialPage?: number
+  _initialPage?: number // Reserved for future pagination
 }
 
 const typeLabels = {
@@ -59,7 +59,7 @@ const typeColors = {
   resource: 'outline',
 } as const
 
-function getMediaUrl(media: any): string {
+function getMediaUrl(media: string | { url?: string } | null | undefined): string {
   if (!media) return 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop&q=80'
   if (typeof media === 'string') return media
   if (media.url) {
@@ -83,7 +83,7 @@ function getResultUrl(result: SearchResult): string {
   return `${basePaths[result.type]}/${result.slug}`
 }
 
-export function SearchResultsPage({ initialQuery = '', initialType = 'all', initialPage = 1 }: SearchResultsPageProps) {
+export function SearchResultsPage({ initialQuery = '', initialType = 'all' }: SearchResultsPageProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState(initialQuery)
@@ -151,9 +151,9 @@ export function SearchResultsPage({ initialQuery = '', initialType = 'all', init
       const data = await response.json()
       setResults(data.results)
       setTotalResults(data.totalResults)
-    } catch (err: any) {
-      console.error('Search error:', err)
-      setError(err.message || 'An error occurred while searching')
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An error occurred while searching'
+      setError(errorMessage)
       setResults({ products: [], projects: [], events: [], posts: [], resources: [] })
       setTotalResults(0)
     } finally {

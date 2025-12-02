@@ -47,7 +47,7 @@ export default async function SearchPage({ searchParams: searchParamsPromise }: 
 
   return (
     <Suspense fallback={<SearchLoading />}>
-      <SearchResultsPage initialQuery={query} initialType={type} initialPage={page} />
+      <SearchResultsPage initialQuery={query} initialType={type} _initialPage={page} />
     </Suspense>
   )
 }

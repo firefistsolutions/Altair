@@ -11,10 +11,19 @@ import { AltairCard } from '@/components/ui/altair-card'
 import { ProjectCard } from '@/components/ui/project-card'
 import type { TransformedProject } from '@/lib/utils/transform-project'
 
+interface LexicalRoot {
+  root?: {
+    text?: string
+    children?: unknown[]
+    [key: string]: unknown
+  }
+  [key: string]: unknown
+}
+
 interface ProjectDetailPageProps {
   project: TransformedProject & {
-    challenge?: string
-    solution?: string
+    challenge?: string | LexicalRoot
+    solution?: string | LexicalRoot
     products?: string[]
     testimonial?: {
       quote: string
@@ -25,6 +34,14 @@ interface ProjectDetailPageProps {
     outcomes?: string[]
   }
   relatedProjects?: TransformedProject[]
+}
+
+// Helper to extract text from LexicalRoot
+const extractText = (content: string | LexicalRoot | undefined): string => {
+  if (!content) return ''
+  if (typeof content === 'string') return content
+  // For LexicalRoot, return empty string for now (can be enhanced later)
+  return ''
 }
 
 const mockRelatedProjects = [
@@ -156,7 +173,7 @@ export function ProjectDetailPage({ project, relatedProjects = [] }: ProjectDeta
           <SectionContainer>
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold text-brand-navy mb-6">The Challenge</h2>
-              <p className="text-lg text-slate-gray leading-relaxed">{project.challenge}</p>
+              <p className="text-lg text-slate-gray leading-relaxed">{extractText(project.challenge)}</p>
             </div>
           </SectionContainer>
         </section>
@@ -168,7 +185,7 @@ export function ProjectDetailPage({ project, relatedProjects = [] }: ProjectDeta
           <SectionContainer>
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold text-brand-navy mb-6">Our Solution</h2>
-              <p className="text-lg text-slate-gray leading-relaxed">{project.solution}</p>
+              <p className="text-lg text-slate-gray leading-relaxed">{extractText(project.solution)}</p>
             </div>
           </SectionContainer>
         </section>
@@ -281,7 +298,7 @@ export function ProjectDetailPage({ project, relatedProjects = [] }: ProjectDeta
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold text-brand-navy mb-8">Project Outcomes</h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {(project.outcomes && Array.isArray(project.outcomes) ? project.outcomes : []).map((outcome: any, index: number) => (
+                {(project.outcomes && Array.isArray(project.outcomes) ? project.outcomes : []).map((outcome: string, index: number) => (
                   <div key={index} className="flex items-start gap-3">
                     <CheckCircle2 className="w-6 h-6 text-brand-bronze flex-shrink-0 mt-0.5" />
                     <p className="text-slate-gray">{outcome}</p>

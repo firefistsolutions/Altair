@@ -38,7 +38,12 @@ export async function getProjects(filters: ProjectFilters = {}): Promise<Project
     sort = '-year',
   } = filters
 
-  const where: any = {
+  const where: {
+    _status: { equals: 'published' }
+    hospitalType?: { equals: string }
+    year?: { equals: number }
+    featured?: { equals: boolean }
+  } = {
     _status: {
       equals: 'published',
     },

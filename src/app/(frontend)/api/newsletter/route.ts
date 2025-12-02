@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import configPromise from '@/payload.config'
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
+import { logger } from '@/lib/logger'
 
 // Validation schema for newsletter subscription
 const newsletterSchema = z.object({
@@ -111,9 +112,10 @@ export async function POST(req: NextRequest) {
             <p><small>If you did not subscribe to this newsletter, please ignore this email.</small></p>
           `,
         })
-      } catch (emailError: any) {
+      } catch (emailError: unknown) {
         // Log email error but don't fail the request
-        console.error('Email notification failed:', emailError.message)
+        const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown error'
+        logger.error('Email notification failed:', errorMessage)
       }
     }
 
@@ -122,13 +124,14 @@ export async function POST(req: NextRequest) {
       message: 'Successfully subscribed to newsletter!',
       leadId: lead.id,
     })
-  } catch (error: any) {
-    console.error('Newsletter subscription error:', error)
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    logger.error('Newsletter subscription error:', errorMessage)
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to subscribe. Please try again later.',
-        message: error.message,
+        message: process.env.NODE_ENV === 'development' ? errorMessage : undefined,
       },
       { status: 500 }
     )

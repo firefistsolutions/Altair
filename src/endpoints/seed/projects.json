@@ -1,0 +1,232 @@
+[
+  {
+    "title": "Modern Modular OT Installation - Apollo Hospital",
+    "slug": "apollo-hospital-modular-ot",
+    "client": "Apollo Hospitals",
+    "location": "Mumbai, Maharashtra",
+    "year": 2024,
+    "hospitalType": "private",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Successfully completed a state-of-the-art modular operation theatre installation at Apollo Hospital, Mumbai. This project involved the design, supply, and installation of a complete modular OT system with integrated medical gas pipeline, surgical pendants, and advanced lighting systems. The installation was completed within the scheduled 7-day timeframe with minimal disruption to hospital operations.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          },
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "The project included installation of 4 modular operation theatres, each equipped with premium surgical pendants, medical gas outlets, and comprehensive monitoring systems. All installations are HTM-02-01 compliant and CE certified.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "metrics": [
+      {
+        "label": "Operation Theatres",
+        "value": "4"
+      },
+      {
+        "label": "Installation Time",
+        "value": "7 days"
+      },
+      {
+        "label": "Surgical Pendants",
+        "value": "8 units"
+      },
+      {
+        "label": "Medical Gas Outlets",
+        "value": "32 outlets"
+      },
+      {
+        "label": "Compliance",
+        "value": "HTM-02-01, CE Certified"
+      }
+    ],
+    "featured": true,
+    "meta": {
+      "title": "Apollo Hospital Modular OT Installation | Altair Medical System",
+      "description": "Successfully completed modular operation theatre installation at Apollo Hospital, Mumbai. 4 OTs installed in 7 days with HTM-02-01 compliance."
+    }
+  },
+  {
+    "title": "Government Hospital Critical Care Upgrade",
+    "slug": "government-hospital-critical-care-upgrade",
+    "client": "Government Medical College",
+    "location": "Pune, Maharashtra",
+    "year": 2023,
+    "hospitalType": "government",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Comprehensive upgrade of critical care infrastructure at Government Medical College, Pune. This project involved retrofitting existing ICU and operation theatre facilities with modern medical gas pipeline systems, bed-head units, and surgical pendants. The upgrade was completed in phases to ensure continuous patient care throughout the installation process.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          },
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "The project included installation of medical gas manifolds, pipeline systems, 12 ICU bed-head units, and 6 surgical pendants. All systems are fully compliant with government healthcare standards and HTM-02-01 requirements.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "metrics": [
+      {
+        "label": "ICU Beds",
+        "value": "12"
+      },
+      {
+        "label": "Operation Theatres",
+        "value": "6"
+      },
+      {
+        "label": "Bed-Head Units",
+        "value": "12 units"
+      },
+      {
+        "label": "Surgical Pendants",
+        "value": "6 units"
+      },
+      {
+        "label": "Project Duration",
+        "value": "45 days"
+      }
+    ],
+    "featured": false,
+    "meta": {
+      "title": "Government Hospital Critical Care Upgrade | Altair Medical System",
+      "description": "Comprehensive critical care infrastructure upgrade at Government Medical College, Pune. ICU and OT facilities upgraded with modern medical gas systems."
+    }
+  },
+  {
+    "title": "Private Clinic Medical Gas System",
+    "slug": "private-clinic-medical-gas-system",
+    "client": "City Care Clinic",
+    "location": "Bangalore, Karnataka",
+    "year": 2024,
+    "hospitalType": "private",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Complete medical gas pipeline system installation for a new private clinic in Bangalore. The project included design, supply, and installation of medical gas manifolds, pipeline distribution, and outlet systems for operation theatre and recovery rooms. The installation was completed efficiently within the clinic's construction timeline.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "metrics": [
+      {
+        "label": "Operation Theatres",
+        "value": "2"
+      },
+      {
+        "label": "Recovery Beds",
+        "value": "4"
+      },
+      {
+        "label": "Medical Gas Manifolds",
+        "value": "2 units"
+      },
+      {
+        "label": "Gas Outlets",
+        "value": "16 outlets"
+      },
+      {
+        "label": "Installation Time",
+        "value": "5 days"
+      }
+    ],
+    "featured": false,
+    "meta": {
+      "title": "Private Clinic Medical Gas System | Altair Medical System",
+      "description": "Complete medical gas pipeline system installation for private clinic in Bangalore. HTM-02-01 compliant installation completed in 5 days."
+    }
+  }
+]
+
+

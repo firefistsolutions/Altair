@@ -88,9 +88,13 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
   const startDateStr = startDate ? startDate.toISOString().split('T')[0] : ''
   const endDateStr = endDate ? endDate.toISOString().split('T')[0] : ''
 
+  const descriptionText = typeof transformed.description === 'string' 
+    ? transformed.description 
+    : transformed.title
+
   const eventSchema = generateEventSchema({
     title: transformed.title,
-    description: transformed.description || transformed.title,
+    description: descriptionText,
     image: transformed.image,
     slug: transformed.slug,
     startDate: startDateStr,
@@ -115,6 +119,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
           startDate: startDateStr,
           endDate: endDateStr,
           content: typeof event.description === 'object' ? JSON.stringify(event.description) : '',
+          description: descriptionText,
         }} 
         relatedEvents={relatedEvents} 
       />

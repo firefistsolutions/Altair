@@ -97,8 +97,8 @@ export function ContactPage() {
       setErrors({})
 
       setTimeout(() => setSubmitStatus('idle'), 5000)
-    } catch (error: any) {
-      console.error('Form submission error:', error)
+    } catch (error: unknown) {
+      // Error is already handled by the API response
       setSubmitStatus('error')
       setTimeout(() => setSubmitStatus('idle'), 5000)
     } finally {

@@ -38,7 +38,12 @@ export async function getEvents(filters: EventFilters = {}): Promise<EventsRespo
     sort = '-startDate',
   } = filters
 
-  const where: any = {
+  const where: {
+    _status: { equals: 'published' }
+    eventType?: { equals: string }
+    eventStatus?: { equals: 'upcoming' | 'past' | 'cancelled' }
+    featured?: { equals: boolean }
+  } = {
     _status: {
       equals: 'published',
     },

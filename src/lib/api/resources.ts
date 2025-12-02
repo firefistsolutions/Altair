@@ -36,7 +36,11 @@ export async function getResources(filters: ResourceFilters = {}): Promise<Resou
     sort = '-publishedAt',
   } = filters
 
-  const where: any = {
+  const where: {
+    _status: { equals: 'published' }
+    category?: { equals: string }
+    featured?: { equals: boolean }
+  } = {
     _status: {
       equals: 'published',
     },

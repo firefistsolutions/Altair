@@ -1,0 +1,152 @@
+[
+  {
+    "title": "Understanding HTM-02-01 Compliance for Medical Gas Systems",
+    "slug": "htm-02-01-compliance-medical-gas-systems",
+    "categories": [],
+    "content": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "HTM-02-01 is the UK Health Technical Memorandum that provides guidance on the design, installation, and maintenance of medical gas pipeline systems. While primarily a UK standard, it's widely recognized and adopted in many countries as a best practice for medical gas systems.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          },
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Key requirements of HTM-02-01 include proper color coding of gas pipelines, installation of appropriate outlet types, regular testing and maintenance procedures, and comprehensive documentation. Compliance ensures patient safety and operational reliability.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          },
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "At Altair Medical System, all our medical gas systems and surgical pendants are designed and installed to meet HTM-02-01 standards, ensuring the highest levels of safety and compliance for healthcare facilities.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "meta": {
+      "title": "HTM-02-01 Compliance for Medical Gas Systems | Altair Medical System",
+      "description": "Learn about HTM-02-01 compliance requirements for medical gas pipeline systems and how Altair Medical System ensures full compliance."
+    }
+  },
+  {
+    "title": "Benefits of Modular Operation Theatres in Modern Healthcare",
+    "slug": "benefits-modular-operation-theatres",
+    "categories": [],
+    "content": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Modular operation theatres represent the future of surgical infrastructure, offering numerous advantages over traditional construction methods. These prefabricated systems can be installed in a fraction of the time required for conventional building, minimizing disruption to hospital operations.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          },
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Key benefits include rapid installation (typically 5-7 days), seamless panel construction for easy cleaning, fully configurable layouts to match specific surgical requirements, and compliance with international standards including HTM-02-01 and ASTM.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          },
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Modular OTs also offer superior hygiene with anti-bacterial surfaces, integrated medical gas systems, and premium LED lighting solutions. They can be easily expanded or reconfigured as hospital needs evolve.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "meta": {
+      "title": "Benefits of Modular Operation Theatres | Altair Medical System",
+      "description": "Discover the advantages of modular operation theatres: rapid installation, superior hygiene, and compliance with international standards."
+    }
+  }
+]
+
+

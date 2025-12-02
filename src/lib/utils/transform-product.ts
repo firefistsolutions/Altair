@@ -1,6 +1,18 @@
 import type { Product, Media } from '@/payload-types'
 import { getMediaUrl } from '@/utilities/getMediaUrl'
 
+// RichText Lexical format type
+interface LexicalNode {
+  text?: string
+  children?: LexicalNode[]
+  [key: string]: unknown
+}
+
+interface LexicalRoot {
+  root?: LexicalNode
+  [key: string]: unknown
+}
+
 export interface TransformedProduct {
   id: string
   title: string
@@ -15,8 +27,8 @@ export interface TransformedProduct {
   categorySlug?: string
   featured: boolean
   datasheetUrl?: string
-  overview?: any // RichText
-  features?: any // RichText
+  overview?: LexicalRoot | string // RichText
+  features?: string[] // Array of feature strings
   metaTitle?: string
   metaDescription?: string
   metaImage?: string
@@ -70,7 +82,7 @@ export const transformProduct = (product: Product): TransformedProduct => {
     description = product.description
   } else if (typeof product.description === 'object' && product.description !== null) {
     // Extract plain text from RichText Lexical format
-    const extractText = (node: any): string => {
+    const extractText = (node: LexicalNode | string): string => {
       if (typeof node === 'string') return node
       if (node?.text) return node.text
       if (node?.children && Array.isArray(node.children)) {
@@ -78,7 +90,8 @@ export const transformProduct = (product: Product): TransformedProduct => {
       }
       return ''
     }
-    description = extractText(product.description.root || product.description) || ''
+    const root = (product.description as LexicalRoot).root || product.description
+    description = extractText(root as LexicalNode) || ''
   }
 
   return {
@@ -96,7 +109,7 @@ export const transformProduct = (product: Product): TransformedProduct => {
     featured: product.featured || false,
     datasheetUrl: datasheetUrl,
     overview: product.description || undefined,
-    features: product.keyFeatures ? product.keyFeatures.map(f => f.feature).filter(Boolean) : undefined,
+    features: product.keyFeatures ? product.keyFeatures.map(f => f.feature || '').filter(Boolean) as string[] : undefined,
     metaTitle: product.meta?.title || product.title || 'Untitled Product',
     metaDescription: product.meta?.description || description || 'Learn more about our medical products.',
     metaImage: metaImage,
