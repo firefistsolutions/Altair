@@ -8,75 +8,106 @@ import { EventCard } from '@/components/ui/event-card'
 import { AltairButton } from '@/components/ui/altair-button'
 import { Input } from '@/components/ui/input'
 import { AltairBadge } from '@/components/ui/altair-badge'
+import type { Event } from '@/payload-types'
+import { transformEvent, type TransformedEvent } from '@/lib/utils/transform-event'
 
-// Mock events data - will be replaced with CMS data in Phase 6
-const allEvents = [
+interface EventsListingPageProps {
+  initialEvents?: Event[]
+  initialEventTypes?: string[]
+}
+
+const mockEvents: TransformedEvent[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Medicall Expo Mumbai 2025',
     dateRange: '12-14 Dec 2025',
-    location: 'Bombay Exhibition Center',
-    venue: 'Mumbai, Maharashtra',
+    startDate: new Date('2025-12-12').toISOString(),
+    endDate: new Date('2025-12-14').toISOString(),
+    location: 'Mumbai, Maharashtra',
+    venue: 'Bombay Exhibition Center',
     description: 'Join Workspace Metal Solutions at the 44th Medicall Mumbai Edition. Discover advanced Modular Operation Theater Solutions.',
-    eventType: 'Trade Show' as const,
+    eventType: 'Trade Show',
+    eventStatus: 'upcoming',
     image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=600&fit=crop&q=80',
+    galleryImages: [],
     featured: true,
     slug: 'medicall-expo-mumbai-2025',
   },
   {
-    id: 2,
+    id: '2',
     title: 'India MedTech Expo 2025',
     dateRange: '04-06 Sept 2025',
-    location: 'Bharat Mandapam',
-    venue: 'Pragati Maidan, New Delhi',
+    startDate: new Date('2025-09-04').toISOString(),
+    endDate: new Date('2025-09-06').toISOString(),
+    location: 'New Delhi',
+    venue: 'Pragati Maidan',
     description: 'The nation\'s largest showcase of medical technologies and innovations.',
-    eventType: 'Expo' as const,
+    eventType: 'Expo',
+    eventStatus: 'upcoming',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop&q=80',
+    galleryImages: [],
     featured: false,
     slug: 'india-medtech-expo-2025',
   },
   {
-    id: 3,
+    id: '3',
     title: 'Medicall Chennai 2025',
     dateRange: '25-27 Jul 2025',
-    location: 'Chennai Trade Center',
-    venue: 'Chennai, Tamil Nadu',
+    startDate: new Date('2025-07-25').toISOString(),
+    endDate: new Date('2025-07-27').toISOString(),
+    location: 'Chennai, Tamil Nadu',
+    venue: 'Chennai Trade Center',
     description: 'Join us at the 42nd Medicall Chennai Edition. Discover advanced Modular Operation Theater Solutions.',
-    eventType: 'Trade Show' as const,
+    eventType: 'Trade Show',
+    eventStatus: 'upcoming',
     image: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&h=600&fit=crop&q=80',
+    galleryImages: [],
     featured: false,
     slug: 'medicall-chennai-2025',
   },
   {
-    id: 4,
+    id: '4',
     title: 'Medicall Kolkata 2025',
     dateRange: '15-17 Feb 2025',
-    location: 'Biswa Bangla Mela Prangan',
-    venue: 'Kolkata, West Bengal',
+    startDate: new Date('2025-02-15').toISOString(),
+    endDate: new Date('2025-02-17').toISOString(),
+    location: 'Kolkata, West Bengal',
+    venue: 'Biswa Bangla Mela Prangan',
     description: 'Redefining Healthcare Spaces at the 40th Medicall Kolkata Edition.',
-    eventType: 'Trade Show' as const,
+    eventType: 'Trade Show',
+    eventStatus: 'past',
     image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=80',
+    galleryImages: [],
     featured: false,
     slug: 'medicall-kolkata-2025',
   },
   {
-    id: 5,
+    id: '5',
     title: 'Arab Health 2025',
     dateRange: '27-30 Jan 2025',
-    location: 'Dubai World Trade Centre',
-    venue: 'Dubai, UAE',
+    startDate: new Date('2025-01-27').toISOString(),
+    endDate: new Date('2025-01-30').toISOString(),
+    location: 'Dubai, UAE',
+    venue: 'Dubai World Trade Centre',
     description: 'Showcasing Healthcare Innovations at Arab Health 2025.',
-    eventType: 'Expo' as const,
+    eventType: 'Expo',
+    eventStatus: 'past',
     image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=600&fit=crop&q=80',
+    galleryImages: [],
     featured: false,
     slug: 'arab-health-2025',
   },
 ]
 
-const eventTypes = ['All', 'Trade Show', 'Expo', 'Conference', 'Webinar']
 const eventStatuses = ['All', 'Upcoming', 'Past']
 
-export function EventsListingPage() {
+// Remove the old eventTypes const - it will be replaced by availableEventTypes
+// const eventTypes = ['All', 'Trade Show', 'Expo', 'Conference', 'Webinar']
+
+export function EventsListingPage({ 
+  initialEvents = [], 
+  initialEventTypes = [] 
+}: EventsListingPageProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
@@ -104,8 +135,23 @@ export function EventsListingPage() {
     router.replace(newUrl, { scroll: false })
   }, [debouncedSearch, selectedEventType, selectedStatus, router])
 
+  // Transform CMS events to component format
+  const transformedEvents = useMemo(() => {
+    if (initialEvents.length > 0) {
+      return initialEvents.map(transformEvent)
+    }
+    // Fallback to mock data if no CMS data
+    return mockEvents
+  }, [initialEvents])
+
+  // Build event types list
+  const availableEventTypes = useMemo(() => {
+    const types = ['All', ...initialEventTypes]
+    return types.length > 1 ? types : ['All', 'Trade Show', 'Expo', 'Conference', 'Webinar']
+  }, [initialEventTypes])
+
   const filteredEvents = useMemo(() => {
-    let filtered = [...allEvents]
+    let filtered = [...transformedEvents]
 
     // Search filter
     if (debouncedSearch) {
@@ -113,7 +159,7 @@ export function EventsListingPage() {
         (event) =>
           event.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
           event.location.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-          event.venue.toLowerCase().includes(debouncedSearch.toLowerCase())
+          (event.venue && event.venue.toLowerCase().includes(debouncedSearch.toLowerCase()))
       )
     }
 
@@ -122,12 +168,25 @@ export function EventsListingPage() {
       filtered = filtered.filter((event) => event.eventType === selectedEventType)
     }
 
-    // Status filter (simplified - in production, would check dates)
+    // Status filter - check actual dates
     if (selectedStatus === 'Upcoming') {
-      // Filter for future events (simplified logic)
-      filtered = filtered.filter((event) => event.id <= 3)
+      const now = new Date()
+      filtered = filtered.filter((event) => {
+        if (!event.startDate) return false
+        const startDate = typeof event.startDate === 'string' 
+          ? new Date(event.startDate) 
+          : event.startDate
+        return startDate >= now && event.eventStatus === 'upcoming'
+      })
     } else if (selectedStatus === 'Past') {
-      filtered = filtered.filter((event) => event.id > 3)
+      const now = new Date()
+      filtered = filtered.filter((event) => {
+        if (!event.startDate) return false
+        const startDate = typeof event.startDate === 'string' 
+          ? new Date(event.startDate) 
+          : event.startDate
+        return startDate < now || event.eventStatus === 'past'
+      })
     }
 
     // Sort: featured first, then by date
@@ -138,7 +197,7 @@ export function EventsListingPage() {
     })
 
     return filtered
-  }, [debouncedSearch, selectedEventType, selectedStatus])
+  }, [debouncedSearch, selectedEventType, selectedStatus, transformedEvents])
 
   const activeFiltersCount =
     (debouncedSearch ? 1 : 0) + (selectedEventType !== 'All' ? 1 : 0) + (selectedStatus !== 'All' ? 1 : 0)
@@ -202,7 +261,7 @@ export function EventsListingPage() {
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-sm font-medium text-slate-gray whitespace-nowrap">Event Type:</span>
                 <div className="flex gap-2 flex-wrap">
-                  {eventTypes.map((type) => (
+                  {availableEventTypes.map((type) => (
                     <button
                       key={type}
                       onClick={() => setSelectedEventType(type)}
@@ -253,7 +312,7 @@ export function EventsListingPage() {
                 <div>
                   <label className="block text-sm font-medium text-slate-gray mb-2">Event Type</label>
                   <div className="flex flex-wrap gap-2">
-                    {eventTypes.map((type) => (
+                    {availableEventTypes.map((type) => (
                       <button
                         key={type}
                         onClick={() => setSelectedEventType(type)}
@@ -333,10 +392,10 @@ export function EventsListingPage() {
                     dateRange={event.dateRange}
                     location={event.location}
                     venue={event.venue}
-                    description={event.description}
+                    description={typeof event.description === 'string' ? event.description : undefined}
                     eventType={event.eventType}
                     featured={event.featured}
-                    registrationLink={`/events/${event.slug}`}
+                    slug={event.slug}
                   />
                 ))}
               </div>

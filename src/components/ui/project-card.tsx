@@ -11,6 +11,8 @@ interface ProjectCardProps {
   client: string
   metrics: { label: string; value: string }[]
   slug: string
+  location?: string
+  year?: string
   priority?: boolean
 }
 

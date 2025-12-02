@@ -1,0 +1,840 @@
+[
+  {
+    "title": "Surgical Pendant - Single Arm",
+    "slug": "surgical-pendant-single-arm",
+    "category": "surgical-pendant",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Advanced surgical pendant with single arm design, providing medical gas outlets and electrical services for operation theatres. Designed for optimal workflow and patient safety. Compliant with HTM-02-01 and ASTM standards. Features touchless sensor operation, seamless panel construction, and premium LED lighting system.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "specs": [
+      {
+        "label": "Arm Type",
+        "value": "Single Arm"
+      },
+      {
+        "label": "Gas Outlets",
+        "value": "Oxygen, Nitrous Oxide, Medical Air, Vacuum"
+      },
+      {
+        "label": "Electrical Outlets",
+        "value": "4 x 5A, 2 x 15A"
+      },
+      {
+        "label": "Load Capacity",
+        "value": "50 kg"
+      },
+      {
+        "label": "Standards",
+        "value": "HTM-02-01, ASTM, CE Certified"
+      },
+      {
+        "label": "Material",
+        "value": "Stainless Steel 304"
+      },
+      {
+        "label": "Finish",
+        "value": "Oxygen Cleaning Certified"
+      },
+      {
+        "label": "Reach",
+        "value": "1800 mm"
+      },
+      {
+        "label": "Rotation",
+        "value": "360°"
+      }
+    ],
+    "keyFeatures": [
+      {
+        "feature": "Touchless sensor operation for enhanced hygiene"
+      },
+      {
+        "feature": "Seamless panel construction for easy cleaning"
+      },
+      {
+        "feature": "Premium LED lighting system with adjustable intensity"
+      },
+      {
+        "feature": "Medical gas pipeline integration with color-coded outlets"
+      },
+      {
+        "feature": "Oxygen cleaning certified"
+      },
+      {
+        "feature": "Easy maintenance and service access"
+      },
+      {
+        "feature": "Smooth arm movement with locking mechanism"
+      }
+    ],
+    "featured": true,
+    "meta": {
+      "title": "Surgical Pendant - Single Arm | Altair Medical System",
+      "description": "Advanced surgical pendant with single arm design for operation theatres. HTM-02-01 compliant with medical gas outlets and electrical services. CE certified."
+    }
+  },
+  {
+    "title": "Surgical Pendant - Double Arm",
+    "slug": "surgical-pendant-double-arm",
+    "category": "surgical-pendant",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Premium surgical pendant featuring dual arm configuration for enhanced flexibility and coverage in operation theatres. Provides comprehensive medical gas and electrical services with independent arm control. Ideal for complex surgical procedures requiring multiple service points. Built to HTM-02-01 standards with premium materials and finish.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "specs": [
+      {
+        "label": "Arm Type",
+        "value": "Double Arm"
+      },
+      {
+        "label": "Gas Outlets Per Arm",
+        "value": "Oxygen, Nitrous Oxide, Medical Air, Vacuum, Nitrogen"
+      },
+      {
+        "label": "Electrical Outlets Per Arm",
+        "value": "6 x 5A, 3 x 15A"
+      },
+      {
+        "label": "Load Capacity Per Arm",
+        "value": "60 kg"
+      },
+      {
+        "label": "Total Load Capacity",
+        "value": "120 kg"
+      },
+      {
+        "label": "Standards",
+        "value": "HTM-02-01, ASTM F2504, CE Certified, ISO 7396-1"
+      },
+      {
+        "label": "Material",
+        "value": "Stainless Steel 316L"
+      },
+      {
+        "label": "Finish",
+        "value": "Oxygen Cleaning Certified, Electropolished"
+      },
+      {
+        "label": "Reach Per Arm",
+        "value": "2000 mm"
+      },
+      {
+        "label": "Rotation",
+        "value": "360° per arm"
+      },
+      {
+        "label": "Height Adjustment",
+        "value": "1500-2800 mm"
+      }
+    ],
+    "keyFeatures": [
+      {
+        "feature": "Dual arm configuration for maximum flexibility"
+      },
+      {
+        "feature": "Independent arm control and positioning"
+      },
+      {
+        "feature": "Touchless sensor operation on all outlets"
+      },
+      {
+        "feature": "Premium LED surgical lighting with color temperature control"
+      },
+      {
+        "feature": "Seamless stainless steel construction"
+      },
+      {
+        "feature": "Medical gas pipeline integration with Schrader outlets"
+      },
+      {
+        "feature": "Emergency lowering system"
+      },
+      {
+        "feature": "Easy maintenance access panels"
+      }
+    ],
+    "featured": true,
+    "meta": {
+      "title": "Surgical Pendant - Double Arm | Altair Medical System",
+      "description": "Premium dual arm surgical pendant for operation theatres. HTM-02-01 compliant with independent arm control, medical gas outlets, and electrical services. CE certified."
+    }
+  },
+  {
+    "title": "Surgical Pendant - Ceiling Mounted",
+    "slug": "surgical-pendant-ceiling-mounted",
+    "category": "surgical-pendant",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Ceiling-mounted surgical pendant system designed for modern operation theatres. Provides comprehensive medical gas and electrical services with flexible positioning. Features advanced control systems and premium LED lighting. Suitable for both new installations and retrofitting existing facilities.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "specs": [
+      {
+        "label": "Mounting Type",
+        "value": "Ceiling Mounted"
+      },
+      {
+        "label": "Gas Outlets",
+        "value": "Oxygen, Nitrous Oxide, Medical Air, Vacuum, Nitrogen, CO2"
+      },
+      {
+        "label": "Electrical Outlets",
+        "value": "8 x 5A, 4 x 15A, 2 x 32A"
+      },
+      {
+        "label": "Load Capacity",
+        "value": "80 kg"
+      },
+      {
+        "label": "Standards",
+        "value": "HTM-02-01, ASTM, CE Certified, ISO 7396-1"
+      },
+      {
+        "label": "Material",
+        "value": "Stainless Steel 304/316L"
+      },
+      {
+        "label": "Ceiling Height Requirement",
+        "value": "2800-3500 mm"
+      },
+      {
+        "label": "Vertical Travel",
+        "value": "1200 mm"
+      },
+      {
+        "label": "Horizontal Reach",
+        "value": "2200 mm"
+      },
+      {
+        "label": "Rotation",
+        "value": "360° continuous"
+      }
+    ],
+    "keyFeatures": [
+      {
+        "feature": "Ceiling-mounted design saves floor space"
+      },
+      {
+        "feature": "Electric height adjustment with emergency lowering"
+      },
+      {
+        "feature": "Touchless sensor operation"
+      },
+      {
+        "feature": "Premium LED surgical lighting system"
+      },
+      {
+        "feature": "Comprehensive medical gas integration"
+      },
+      {
+        "feature": "Modular design for easy customization"
+      },
+      {
+        "feature": "Oxygen cleaning certified"
+      },
+      {
+        "feature": "Suitable for retrofit installations"
+      }
+    ],
+    "featured": false,
+    "meta": {
+      "title": "Surgical Pendant - Ceiling Mounted | Altair Medical System",
+      "description": "Ceiling-mounted surgical pendant system for operation theatres. HTM-02-01 compliant with electric height adjustment and comprehensive medical services."
+    }
+  },
+  {
+    "title": "Surgical Pendant - Anesthesia",
+    "slug": "surgical-pendant-anesthesia",
+    "category": "surgical-pendant",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Specialized anesthesia pendant designed for operation theatres requiring dedicated anesthesia workstations. Features comprehensive medical gas outlets, vacuum services, and electrical connections optimized for anesthesia equipment. Compliant with all relevant medical gas standards and designed for optimal workflow in anesthesia procedures.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Anesthesia Pendant"
+      },
+      {
+        "label": "Gas Outlets",
+        "value": "Oxygen (2x), Nitrous Oxide (2x), Medical Air (2x), Vacuum (2x)"
+      },
+      {
+        "label": "Electrical Outlets",
+        "value": "6 x 5A, 4 x 15A, 2 x 32A"
+      },
+      {
+        "label": "Data Outlets",
+        "value": "Ethernet, USB"
+      },
+      {
+        "label": "Load Capacity",
+        "value": "70 kg"
+      },
+      {
+        "label": "Standards",
+        "value": "HTM-02-01, ASTM, CE Certified, ISO 7396-1"
+      },
+      {
+        "label": "Material",
+        "value": "Stainless Steel 316L"
+      },
+      {
+        "label": "Gas Outlet Type",
+        "value": "Schrader (DISS) with color coding"
+      },
+      {
+        "label": "Reach",
+        "value": "1900 mm"
+      }
+    ],
+    "keyFeatures": [
+      {
+        "feature": "Dedicated design for anesthesia workstations"
+      },
+      {
+        "feature": "Multiple gas outlet configuration"
+      },
+      {
+        "feature": "Touchless sensor operation"
+      },
+      {
+        "feature": "Integrated data connectivity"
+      },
+      {
+        "feature": "Premium LED lighting for anesthesia area"
+      },
+      {
+        "feature": "Color-coded gas outlets per ISO standards"
+      },
+      {
+        "feature": "Oxygen cleaning certified"
+      },
+      {
+        "feature": "Easy access for equipment mounting"
+      }
+    ],
+    "featured": false,
+    "meta": {
+      "title": "Surgical Pendant - Anesthesia | Altair Medical System",
+      "description": "Specialized anesthesia pendant for operation theatres. HTM-02-01 compliant with comprehensive medical gas outlets optimized for anesthesia equipment."
+    }
+  },
+  {
+    "title": "Surgical Pendant - Scrub Station",
+    "slug": "surgical-pendant-scrub-station",
+    "category": "surgical-pendant",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Specialized surgical pendant designed for scrub stations and preparation areas. Features integrated handwashing facilities, medical gas outlets, and electrical services. Optimized for pre-operative preparation workflows with touchless operation and premium hygiene features.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Scrub Station Pendant"
+      },
+      {
+        "label": "Gas Outlets",
+        "value": "Oxygen, Medical Air, Vacuum"
+      },
+      {
+        "label": "Electrical Outlets",
+        "value": "4 x 5A, 2 x 15A"
+      },
+      {
+        "label": "Water Outlets",
+        "value": "Hot, Cold, Mixer"
+      },
+      {
+        "label": "Load Capacity",
+        "value": "40 kg"
+      },
+      {
+        "label": "Standards",
+        "value": "HTM-02-01, CE Certified, Water Regulations"
+      },
+      {
+        "label": "Material",
+        "value": "Stainless Steel 304"
+      },
+      {
+        "label": "Finish",
+        "value": "Oxygen Cleaning Certified"
+      },
+      {
+        "label": "Reach",
+        "value": "1600 mm"
+      }
+    ],
+    "keyFeatures": [
+      {
+        "feature": "Integrated scrub station design"
+      },
+      {
+        "feature": "Touchless sensor operation for hygiene"
+      },
+      {
+        "feature": "Premium LED lighting for scrub area"
+      },
+      {
+        "feature": "Medical gas outlets for preparation"
+      },
+      {
+        "feature": "Water-resistant construction"
+      },
+      {
+        "feature": "Easy cleaning and maintenance"
+      },
+      {
+        "feature": "Compact design for space efficiency"
+      }
+    ],
+    "featured": false,
+    "meta": {
+      "title": "Surgical Pendant - Scrub Station | Altair Medical System",
+      "description": "Specialized scrub station pendant with integrated handwashing facilities and medical gas outlets. HTM-02-01 compliant for operation theatre preparation areas."
+    }
+  },
+  {
+    "title": "Surgical Pendant - ICU",
+    "slug": "surgical-pendant-icu",
+    "category": "surgical-pendant",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Intensive Care Unit pendant system designed for critical care environments. Features comprehensive medical gas services, electrical outlets, and monitoring equipment support. Optimized for 24/7 operation with robust construction and reliable performance. Suitable for ICU, CCU, and high-dependency units.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "specs": [
+      {
+        "label": "Type",
+        "value": "ICU Pendant"
+      },
+      {
+        "label": "Gas Outlets",
+        "value": "Oxygen (2x), Medical Air (2x), Vacuum (2x), Nitrous Oxide"
+      },
+      {
+        "label": "Electrical Outlets",
+        "value": "8 x 5A, 4 x 15A, 2 x 32A"
+      },
+      {
+        "label": "Data Outlets",
+        "value": "Ethernet, USB, Serial"
+      },
+      {
+        "label": "Load Capacity",
+        "value": "100 kg"
+      },
+      {
+        "label": "Standards",
+        "value": "HTM-02-01, CE Certified, ISO 7396-1, IEC 60601"
+      },
+      {
+        "label": "Material",
+        "value": "Stainless Steel 316L"
+      },
+      {
+        "label": "Operating Life",
+        "value": "24/7 continuous operation"
+      },
+      {
+        "label": "Reach",
+        "value": "2100 mm"
+      },
+      {
+        "label": "Height Adjustment",
+        "value": "1400-2600 mm"
+      }
+    ],
+    "keyFeatures": [
+      {
+        "feature": "Designed for ICU and critical care environments"
+      },
+      {
+        "feature": "24/7 continuous operation capability"
+      },
+      {
+        "feature": "Comprehensive medical gas services"
+      },
+      {
+        "feature": "Integrated data connectivity for monitoring"
+      },
+      {
+        "feature": "Premium LED lighting with night mode"
+      },
+      {
+        "feature": "Touchless sensor operation"
+      },
+      {
+        "feature": "Robust construction for heavy-duty use"
+      },
+      {
+        "feature": "Emergency lowering system"
+      }
+    ],
+    "featured": false,
+    "meta": {
+      "title": "Surgical Pendant - ICU | Altair Medical System",
+      "description": "ICU pendant system for critical care environments. HTM-02-01 compliant with comprehensive medical gas services and 24/7 operation capability."
+    }
+  },
+  {
+    "title": "Surgical Pendant - Mobile",
+    "slug": "surgical-pendant-mobile",
+    "category": "surgical-pendant",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Mobile surgical pendant system with floor-mounted base and flexible positioning. Ideal for multi-purpose operation rooms and facilities requiring flexible equipment positioning. Features comprehensive medical gas and electrical services with easy mobility and positioning. Suitable for temporary setups and flexible theatre configurations.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Mobile Pendant"
+      },
+      {
+        "label": "Mounting",
+        "value": "Floor-mounted with castors"
+      },
+      {
+        "label": "Gas Outlets",
+        "value": "Oxygen, Medical Air, Vacuum, Nitrous Oxide"
+      },
+      {
+        "label": "Electrical Outlets",
+        "value": "6 x 5A, 3 x 15A"
+      },
+      {
+        "label": "Load Capacity",
+        "value": "55 kg"
+      },
+      {
+        "label": "Standards",
+        "value": "HTM-02-01, CE Certified"
+      },
+      {
+        "label": "Material",
+        "value": "Stainless Steel 304"
+      },
+      {
+        "label": "Base Dimensions",
+        "value": "600 x 600 mm"
+      },
+      {
+        "label": "Reach",
+        "value": "1800 mm"
+      },
+      {
+        "label": "Mobility",
+        "value": "Lockable castors, 360° rotation"
+      }
+    ],
+    "keyFeatures": [
+      {
+        "feature": "Mobile design for flexible positioning"
+      },
+      {
+        "feature": "Floor-mounted with lockable castors"
+      },
+      {
+        "feature": "Comprehensive medical gas services"
+      },
+      {
+        "feature": "Touchless sensor operation"
+      },
+      {
+        "feature": "Premium LED lighting"
+      },
+      {
+        "feature": "Easy repositioning for different procedures"
+      },
+      {
+        "feature": "Suitable for temporary and flexible setups"
+      },
+      {
+        "feature": "Oxygen cleaning certified"
+      }
+    ],
+    "featured": false,
+    "meta": {
+      "title": "Surgical Pendant - Mobile | Altair Medical System",
+      "description": "Mobile surgical pendant system with floor-mounted base. HTM-02-01 compliant for flexible operation room configurations."
+    }
+  },
+  {
+    "title": "Surgical Pendant - Compact",
+    "slug": "surgical-pendant-compact",
+    "category": "surgical-pendant",
+    "description": {
+      "root": {
+        "children": [
+          {
+            "children": [
+              {
+                "detail": 0,
+                "format": 0,
+                "mode": "normal",
+                "style": "",
+                "text": "Compact surgical pendant designed for smaller operation theatres and procedure rooms. Provides essential medical gas and electrical services in a space-efficient design. Ideal for minor procedures, endoscopy suites, and outpatient surgery facilities. Maintains full compliance with medical gas standards while optimizing space utilization.",
+                "type": "text",
+                "version": 1
+              }
+            ],
+            "direction": "ltr",
+            "format": "",
+            "indent": 0,
+            "type": "paragraph",
+            "version": 1
+          }
+        ],
+        "direction": "ltr",
+        "format": "",
+        "indent": 0,
+        "type": "root",
+        "version": 1
+      }
+    },
+    "specs": [
+      {
+        "label": "Type",
+        "value": "Compact Pendant"
+      },
+      {
+        "label": "Gas Outlets",
+        "value": "Oxygen, Medical Air, Vacuum"
+      },
+      {
+        "label": "Electrical Outlets",
+        "value": "4 x 5A, 2 x 15A"
+      },
+      {
+        "label": "Load Capacity",
+        "value": "35 kg"
+      },
+      {
+        "label": "Standards",
+        "value": "HTM-02-01, CE Certified"
+      },
+      {
+        "label": "Material",
+        "value": "Stainless Steel 304"
+      },
+      {
+        "label": "Dimensions",
+        "value": "Compact design, space-efficient"
+      },
+      {
+        "label": "Reach",
+        "value": "1500 mm"
+      },
+      {
+        "label": "Weight",
+        "value": "Lightweight construction"
+      }
+    ],
+    "keyFeatures": [
+      {
+        "feature": "Compact design for space efficiency"
+      },
+      {
+        "feature": "Essential medical gas services"
+      },
+      {
+        "feature": "Touchless sensor operation"
+      },
+      {
+        "feature": "Premium LED lighting"
+      },
+      {
+        "feature": "Ideal for minor procedures"
+      },
+      {
+        "feature": "Suitable for endoscopy and outpatient facilities"
+      },
+      {
+        "feature": "Oxygen cleaning certified"
+      },
+      {
+        "feature": "Cost-effective solution"
+      }
+    ],
+    "featured": false,
+    "meta": {
+      "title": "Surgical Pendant - Compact | Altair Medical System",
+      "description": "Compact surgical pendant for smaller operation theatres. HTM-02-01 compliant with essential medical gas services in space-efficient design."
+    }
+  }
+]

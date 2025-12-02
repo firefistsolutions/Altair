@@ -10,8 +10,16 @@ import { ComplianceBlock } from '@/components/sections/ComplianceBlock'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
 import { FooterCTASection } from '@/components/sections/FooterCTASection'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
-
 import { getServerSideURL } from '@/utilities/getURL'
+import { getFeaturedProducts } from '@/lib/api/products'
+import { getFeaturedProjects } from '@/lib/api/projects'
+import { getUpcomingEvents, getPastEvents } from '@/lib/api/events'
+import { transformProduct } from '@/lib/utils/transform-product'
+import { transformProject } from '@/lib/utils/transform-project'
+import { transformEvent } from '@/lib/utils/transform-event'
+
+export const dynamic = 'force-static'
+export const revalidate = 3600 // Revalidate every hour
 
 const baseUrl = getServerSideURL()
 
@@ -51,7 +59,21 @@ export const metadata: Metadata = {
   },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch featured content for homepage sections
+  const [featuredProducts, featuredProjects, upcomingEvents, pastEvents] = await Promise.all([
+    getFeaturedProducts(8), // Get 8 featured products for carousel
+    getFeaturedProjects(3), // Get 3 featured projects
+    getUpcomingEvents(6), // Get 6 upcoming events
+    getPastEvents(6), // Get 6 past events
+  ])
+
+  // Transform data for components
+  const transformedProducts = featuredProducts.map(transformProduct)
+  const transformedProjects = featuredProjects.map(transformProject)
+  const transformedUpcomingEvents = upcomingEvents.map(transformEvent)
+  const transformedPastEvents = pastEvents.map(transformEvent)
+
   return (
     <>
       <ErrorBoundary>
@@ -67,13 +89,16 @@ export default function HomePage() {
         <WhyAltairSection />
       </ErrorBoundary>
       <ErrorBoundary>
-        <ProductsCarousel />
+        <ProductsCarousel products={transformedProducts} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <FeaturedProjectsSection />
+        <FeaturedProjectsSection projects={transformedProjects} />
       </ErrorBoundary>
       <ErrorBoundary>
-        <EventsSection />
+        <EventsSection 
+          upcomingEvents={transformedUpcomingEvents} 
+          pastEvents={transformedPastEvents} 
+        />
       </ErrorBoundary>
       <ErrorBoundary>
         <ComplianceBlock />

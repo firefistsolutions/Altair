@@ -9,58 +9,16 @@ import { AltairButton } from '@/components/ui/altair-button'
 import { AltairBadge } from '@/components/ui/altair-badge'
 import { AltairCard } from '@/components/ui/altair-card'
 import { ProductCard } from '@/components/ui/product-card'
+import RichText from '@/components/RichText'
+
+import type { TransformedProduct } from '@/lib/utils/transform-product'
 
 interface ProductDetailPageProps {
-  product: {
-    slug: string
-    title: string
-    description: string
-    image: string
-    images: string[]
-    specs: string[]
-    category: string
-    featured: boolean
-    datasheetUrl?: string
-    overview?: string
-    features?: string[]
-  }
+  product: TransformedProduct
+  relatedProducts?: TransformedProduct[]
 }
 
-// Mock related products - will be replaced with CMS data in Phase 6
-const relatedProducts = [
-  {
-    id: 2,
-    title: 'Surgical Pendant',
-    description: 'Advanced surgical pendant with medical gas outlets and electrical services.',
-    image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=600&fit=crop&q=80',
-    specs: ['CE Certified', 'Gas Outlets', 'Electrical'],
-    slug: 'surgical-pendant',
-    category: 'Critical Care',
-    featured: false,
-  },
-  {
-    id: 3,
-    title: 'Bed-Head Unit',
-    description: 'Comprehensive bed-head unit for critical care with integrated medical gas and electrical services.',
-    image: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&h=600&fit=crop&q=80',
-    specs: ['Oxygen Cleaning', 'Color-Coded', 'ISO 13485'],
-    slug: 'bed-head-unit',
-    category: 'Critical Care',
-    featured: false,
-  },
-  {
-    id: 4,
-    title: 'Medical Gas Manifold',
-    description: 'Central medical gas manifold system with alarm panels and zone valve boxes.',
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=80',
-    specs: ['Central System', 'Alarm Panels', 'Zone Valves'],
-    slug: 'medical-gas-manifold',
-    category: 'Medical Gas Systems',
-    featured: false,
-  },
-]
-
-export function ProductDetailPage({ product }: ProductDetailPageProps) {
+export function ProductDetailPage({ product, relatedProducts = [] }: ProductDetailPageProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
 
@@ -93,7 +51,8 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
     'HTM-02-01 compliant',
   ]
 
-  const technicalSpecs = [
+  // Use actual product specs from database, or fallback to default
+  const technicalSpecs = product.technicalSpecs || [
     { label: 'Compliance', value: 'HTM-02-01, ASTM' },
     { label: 'Panel Type', value: 'Seamless, Anti-bacterial' },
     { label: 'Installation Time', value: '5-7 days' },
@@ -244,25 +203,17 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
         <SectionContainer>
           <div className="max-w-4xl">
             <h2 className="text-3xl font-bold text-brand-navy mb-6">Overview</h2>
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg max-w-none prose-headings:text-brand-navy prose-headings:font-bold prose-p:text-slate-gray prose-p:leading-relaxed prose-a:text-brand-bronze prose-a:no-underline hover:prose-a:underline">
               {product.overview ? (
-                <div
-                  className="text-slate-gray leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: product.overview }}
+                <RichText 
+                  data={product.overview} 
+                  enableGutter={false}
+                  className="text-slate-gray"
                 />
               ) : (
-                <>
-                  <p className="text-slate-gray leading-relaxed mb-4">
-                    Our {product.title} represents the pinnacle of healthcare infrastructure
-                    design. Engineered with precision and built to the highest international standards,
-                    it combines cutting-edge technology with practical functionality.
-                  </p>
-                  <p className="text-slate-gray leading-relaxed">
-                    {product.description} With rapid installation capabilities and comprehensive
-                    support services, our solutions minimize disruption to hospital operations while
-                    delivering exceptional quality and compliance.
-                  </p>
-                </>
+                <p className="text-slate-gray leading-relaxed">
+                  {product.description}
+                </p>
               )}
             </div>
           </div>
@@ -274,7 +225,7 @@ export function ProductDetailPage({ product }: ProductDetailPageProps) {
         <SectionContainer>
           <h2 className="text-3xl font-bold text-brand-navy mb-8 text-center">Key Features</h2>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {features.map((feature, index) => (
+            {(Array.isArray(features) ? features : []).map((feature: any, index: number) => (
               <div key={index} className="flex items-start gap-3">
                 <CheckCircle2 className="w-6 h-6 text-brand-bronze flex-shrink-0 mt-0.5" />
                 <p className="text-slate-gray">{feature}</p>

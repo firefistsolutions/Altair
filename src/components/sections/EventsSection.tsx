@@ -5,70 +5,72 @@ import { SectionContainer } from '@/components/ui/section-container'
 import { EventCard } from '@/components/ui/event-card'
 import { AltairButton } from '@/components/ui/altair-button'
 import Link from 'next/link'
+import type { TransformedEvent } from '@/lib/utils/transform-event'
 
-// Mock events data - will be replaced with CMS data in Phase 6
-const upcomingEvents = [
+interface EventsSectionProps {
+  upcomingEvents?: TransformedEvent[]
+  pastEvents?: TransformedEvent[]
+}
+
+// Mock events data - fallback if no CMS data
+const mockUpcomingEvents: TransformedEvent[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Medicall Expo Mumbai 2025',
-    dateRange: '12-14 Dec 2025',
-    location: 'Bombay Exhibition Center',
-    venue: 'Mumbai, Maharashtra',
     description: 'Join Workspace Metal Solutions at the 44th Medicall Mumbai Edition. Discover advanced Modular Operation Theater Solutions.',
-    eventType: 'Trade Show' as const,
     image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=600&fit=crop&q=80',
+    galleryImages: [],
+    slug: 'medicall-expo-mumbai-2025',
+    eventType: 'Trade Show',
+    eventStatus: 'upcoming',
+    startDate: new Date('2025-12-12').toISOString(),
+    endDate: new Date('2025-12-14').toISOString(),
+    dateRange: '12-14 Dec 2025',
+    location: 'Mumbai, Maharashtra',
+    venue: 'Bombay Exhibition Center',
     featured: true,
   },
+]
+
+const mockPastEvents: TransformedEvent[] = [
   {
-    id: 2,
+    id: '2',
     title: 'India MedTech Expo 2025',
-    dateRange: '04-06 Sept 2025',
-    location: 'Bharat Mandapam',
-    venue: 'Pragati Maidan, New Delhi',
     description: 'The nation\'s largest showcase of medical technologies and innovations.',
-    eventType: 'Expo' as const,
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop&q=80',
-    featured: false,
-  },
-  {
-    id: 3,
-    title: 'Medicall Chennai 2025',
-    dateRange: '25-27 Jul 2025',
-    location: 'Chennai Trade Center',
-    venue: 'Chennai, Tamil Nadu',
-    description: 'Join us at the 42nd Medicall Chennai Edition. Discover advanced Modular Operation Theater Solutions.',
-    eventType: 'Trade Show' as const,
-    image: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&h=600&fit=crop&q=80',
-    featured: false,
-  },
-]
-
-const pastEvents = [
-  {
-    id: 4,
-    title: 'Medicall Kolkata 2025',
-    dateRange: '15-17 Feb 2025',
-    location: 'Biswa Bangla Mela Prangan',
-    venue: 'Kolkata, West Bengal',
-    description: 'Redefining Healthcare Spaces at the 40th Medicall Kolkata Edition.',
-    eventType: 'Trade Show' as const,
-    image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=80',
-    featured: false,
-  },
-  {
-    id: 5,
-    title: 'Arab Health 2025',
-    dateRange: '27-30 Jan 2025',
-    location: 'Dubai World Trade Centre',
-    venue: 'Dubai, UAE',
-    description: 'Showcasing Healthcare Innovations at Arab Health 2025.',
-    eventType: 'Expo' as const,
-    image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=600&fit=crop&q=80',
+    galleryImages: [],
+    slug: 'india-medtech-expo-2025',
+    eventType: 'Expo',
+    eventStatus: 'past',
+    startDate: new Date('2025-09-04').toISOString(),
+    endDate: new Date('2025-09-06').toISOString(),
+    dateRange: '04-06 Sept 2025',
+    location: 'New Delhi',
+    venue: 'Pragati Maidan',
     featured: false,
   },
 ]
 
-export function EventsSection() {
+function formatDateRange(startDate: string | Date, endDate: string | Date): string {
+  const start = typeof startDate === 'string' ? new Date(startDate) : startDate
+  const end = typeof endDate === 'string' ? new Date(endDate) : endDate
+  
+  const startDay = start.getDate()
+  const startMonth = start.toLocaleDateString('en-GB', { month: 'short' })
+  const endDay = end.getDate()
+  const endMonth = end.toLocaleDateString('en-GB', { month: 'short' })
+  const endYear = end.getFullYear()
+  
+  if (startMonth === endMonth && start.getFullYear() === endYear) {
+    return `${startDay}-${endDay} ${startMonth} ${endYear}`
+  }
+  return `${startDay} ${startMonth} - ${endDay} ${endMonth} ${endYear}`
+}
+
+export function EventsSection({ 
+  upcomingEvents = mockUpcomingEvents, 
+  pastEvents = mockPastEvents 
+}: EventsSectionProps) {
   const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming')
   const [isTransitioning, setIsTransitioning] = useState(false)
   const events = activeTab === 'upcoming' ? upcomingEvents : pastEvents
@@ -138,17 +140,18 @@ export function EventsSection() {
               isTransitioning ? 'opacity-0' : 'opacity-100'
             }`}
           >
-            {events.map((event) => (
+            {events.slice(0, 6).map((event) => (
               <EventCard
                 key={event.id}
                 image={event.image}
                 title={event.title}
-                dateRange={event.dateRange}
+                dateRange={formatDateRange(event.startDate, event.endDate)}
                 location={event.location}
-                venue={event.venue}
+                venue={event.venue || event.location}
                 description={event.description}
                 eventType={event.eventType}
                 featured={event.featured}
+                slug={event.slug}
               />
             ))}
           </div>
@@ -164,4 +167,3 @@ export function EventsSection() {
     </section>
   )
 }
-

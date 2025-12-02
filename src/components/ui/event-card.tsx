@@ -15,9 +15,10 @@ interface EventCardProps {
   location: string
   venue?: string
   description?: string
-  eventType: 'Trade Show' | 'Expo' | 'Conference' | 'Webinar'
+  eventType: 'Trade Show' | 'Expo' | 'Conference' | 'Webinar' | string
   registrationLink?: string
   featured?: boolean
+  slug?: string
   className?: string
 }
 
@@ -31,6 +32,7 @@ export function EventCard({
   eventType,
   registrationLink,
   featured = false,
+  slug,
   className,
 }: EventCardProps) {
   return (
@@ -87,11 +89,11 @@ export function EventCard({
 
         {registrationLink ? (
           <AltairButton variant="bronze" size="sm" asChild className="w-full" aria-label={`Register for ${title}`}>
-            <Link href={registrationLink}>Register Now</Link>
+            <a href={registrationLink} target="_blank" rel="noopener noreferrer">Register Now</a>
           </AltairButton>
         ) : (
           <AltairButton variant="outline-bronze" size="sm" asChild className="w-full" aria-label={`Learn more about ${title}`}>
-            <Link href={`/events/${title.toLowerCase().replace(/\s+/g, '-')}`}>
+            <Link href={slug ? `/events/${slug}` : `/events/${title.toLowerCase().replace(/\s+/g, '-')}`}>
               Learn More
             </Link>
           </AltairButton>

@@ -8,9 +8,15 @@ import { ProjectCard } from '@/components/ui/project-card'
 import { AltairButton } from '@/components/ui/altair-button'
 import { Input } from '@/components/ui/input'
 import { AltairBadge } from '@/components/ui/altair-badge'
+import type { Project } from '@/payload-types'
+import { transformProject } from '@/lib/utils/transform-project'
 
-// Mock projects data - will be replaced with CMS data in Phase 6
-const allProjects = [
+interface ProjectsListingPageProps {
+  initialProjects?: Project[]
+  initialYears?: number[]
+}
+
+const mockProjects = [
   {
     id: 1,
     title: 'Government Medical College & Hospital, Jalgaon',
@@ -97,15 +103,18 @@ const allProjects = [
   },
 ]
 
-const hospitalTypes = ['All', 'Government Hospital', 'Private Hospital', 'Medical College']
-const years = ['All', '2024', '2023', '2022', '2021']
+const hospitalTypes = ['All', 'Government', 'Private', 'Medical College', 'Research Facility']
+// Years will be populated from CMS data
 const sortOptions = [
   { value: 'recent', label: 'Most Recent' },
   { value: 'name', label: 'Name (A-Z)' },
   { value: 'type', label: 'Hospital Type' },
 ]
 
-export function ProjectsListingPage() {
+export function ProjectsListingPage({ 
+  initialProjects = [], 
+  initialYears = [] 
+}: ProjectsListingPageProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
@@ -138,8 +147,23 @@ export function ProjectsListingPage() {
     router.replace(newUrl, { scroll: false })
   }, [debouncedSearch, selectedHospitalType, selectedYear, sortBy, router])
 
+  // Transform CMS projects to component format
+  const transformedProjects = useMemo(() => {
+    if (initialProjects.length > 0) {
+      return initialProjects.map(transformProject)
+    }
+    // Fallback to mock data if no CMS data
+    return mockProjects
+  }, [initialProjects])
+
+  // Build years list
+  const availableYears = useMemo(() => {
+    const years = ['All', ...initialYears.map(String)]
+    return years.length > 1 ? years : ['All', '2024', '2023', '2022']
+  }, [initialYears])
+
   const filteredProjects = useMemo(() => {
-    let filtered = [...allProjects]
+    let filtered = [...transformedProjects]
 
     // Search filter
     if (debouncedSearch) {
@@ -158,7 +182,7 @@ export function ProjectsListingPage() {
 
     // Year filter
     if (selectedYear !== 'All') {
-      filtered = filtered.filter((project) => project.year === selectedYear)
+      filtered = filtered.filter((project) => project.year?.toString() === selectedYear)
     }
 
     // Sort
@@ -167,7 +191,9 @@ export function ProjectsListingPage() {
         case 'name':
           return a.title.localeCompare(b.title)
         case 'recent':
-          return b.year.localeCompare(a.year) || b.title.localeCompare(a.title)
+          const yearA = typeof a.year === 'string' ? parseInt(a.year) : (typeof a.year === 'number' ? a.year : 0)
+          const yearB = typeof b.year === 'string' ? parseInt(b.year) : (typeof b.year === 'number' ? b.year : 0)
+          return yearB - yearA || a.title.localeCompare(b.title)
         case 'type':
           return a.hospitalType.localeCompare(b.hospitalType)
         default:
@@ -176,7 +202,7 @@ export function ProjectsListingPage() {
     })
 
     return filtered
-  }, [debouncedSearch, selectedHospitalType, selectedYear, sortBy])
+  }, [debouncedSearch, selectedHospitalType, selectedYear, sortBy, transformedProjects])
 
   // Pagination
   const totalPages = Math.ceil(filteredProjects.length / itemsPerPage)
@@ -284,7 +310,7 @@ export function ProjectsListingPage() {
                 <Calendar className="w-4 h-4 text-slate-gray" />
                 <span className="text-sm font-medium text-slate-gray whitespace-nowrap">Year:</span>
                 <div className="flex gap-2 flex-wrap">
-                  {years.map((year) => (
+                  {availableYears.map((year) => (
                     <button
                       key={year}
                       onClick={() => setSelectedYear(year)}
@@ -359,7 +385,7 @@ export function ProjectsListingPage() {
                 <div>
                   <label className="block text-sm font-medium text-slate-gray mb-2">Year</label>
                   <div className="flex flex-wrap gap-2">
-                    {years.map((year) => (
+                    {availableYears.map((year) => (
                       <button
                         key={year}
                         onClick={() => setSelectedYear(year)}

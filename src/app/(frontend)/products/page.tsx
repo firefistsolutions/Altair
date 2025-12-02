@@ -3,42 +3,11 @@ import { Suspense } from 'react'
 import { ProductsListingPage } from '@/components/pages/products/ProductsListingPage'
 import { Loader2 } from 'lucide-react'
 import { getServerSideURL } from '@/utilities/getURL'
+import { getProducts, getProductCategories } from '@/lib/api/products'
+import { generateItemListSchema } from '@/utilities/seo'
 
-// Schema.org ItemList for products page
-function generateProductsListSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Altair Medical System Products',
-    description: 'Comprehensive range of modular operation theatres and medical gas systems',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Modular Operation Theater',
-        url: 'https://altairmedical.com/products/modular-operation-theater',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Surgical Pendant',
-        url: 'https://altairmedical.com/products/surgical-pendant',
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Bed-Head Unit',
-        url: 'https://altairmedical.com/products/bed-head-unit',
-      },
-      {
-        '@type': 'ListItem',
-        position: 4,
-        name: 'Medical Gas Manifold',
-        url: 'https://altairmedical.com/products/medical-gas-manifold',
-      },
-    ],
-  }
-}
+export const dynamic = 'force-static'
+export const revalidate = 3600 // Revalidate every hour
 
 const baseUrl = getServerSideURL()
 
@@ -78,8 +47,20 @@ function ProductsLoading() {
   )
 }
 
-export default function ProductsPage() {
-  const listSchema = generateProductsListSchema()
+export default async function ProductsPage() {
+  // Fetch products and categories for schema
+  const [productsResult, categories] = await Promise.all([
+    getProducts({ limit: 100 }), // Get all for schema
+    getProductCategories(),
+  ])
+
+  const listSchema = generateItemListSchema(
+    productsResult.docs.map((p) => ({
+      name: p.title || '',
+      url: `/products/${p.slug || ''}`,
+    })),
+    'Altair Medical System Products'
+  )
 
   return (
     <>
@@ -88,7 +69,7 @@ export default function ProductsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
       />
       <Suspense fallback={<ProductsLoading />}>
-        <ProductsListingPage />
+        <ProductsListingPage initialProducts={productsResult.docs} initialCategories={categories} />
       </Suspense>
     </>
   )

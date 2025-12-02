@@ -92,8 +92,28 @@ export function RequestQuotePage() {
     setSubmitStatus('idle')
 
     try {
-      // TODO: Replace with actual API endpoint in Phase 6
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      const formDataToSend = new FormData()
+      formDataToSend.append('name', formData.name)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('phone', formData.phone)
+      formDataToSend.append('organization', formData.organization)
+      formDataToSend.append('projectType', formData.projectType)
+      formDataToSend.append('description', formData.description)
+      
+      if (floorPlanFile) {
+        formDataToSend.append('floorPlan', floorPlanFile)
+      }
+
+      const response = await fetch('/api/quote', {
+        method: 'POST',
+        body: formDataToSend,
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit quote request')
+      }
 
       setSubmitStatus('success')
       setFormData({
@@ -108,7 +128,8 @@ export function RequestQuotePage() {
       setErrors({})
 
       setTimeout(() => setSubmitStatus('idle'), 5000)
-    } catch (_error) {
+    } catch (error: any) {
+      console.error('Form submission error:', error)
       setSubmitStatus('error')
       setTimeout(() => setSubmitStatus('idle'), 5000)
     } finally {

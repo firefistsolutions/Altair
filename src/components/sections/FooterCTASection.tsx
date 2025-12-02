@@ -67,17 +67,19 @@ export function FooterCTASection() {
     setSubmitStatus('idle')
 
     try {
-      // TODO: Replace with actual API endpoint in Phase 6
-      // For now, simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
 
-      // In production, this would be:
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // })
-      // if (!response.ok) throw new Error('Submission failed')
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit form')
+      }
 
       setSubmitStatus('success')
       setFormData({ name: '', phone: '', email: '', message: '' })

@@ -8,9 +8,15 @@ import { ProductCard } from '@/components/ui/product-card'
 import { AltairButton } from '@/components/ui/altair-button'
 import { Input } from '@/components/ui/input'
 import { AltairBadge } from '@/components/ui/altair-badge'
+import type { Product } from '@/payload-types'
+import { transformProduct } from '@/lib/utils/transform-product'
 
-// Mock products data - will be replaced with CMS data in Phase 6
-const allProducts = [
+interface ProductsListingPageProps {
+  initialProducts?: Product[]
+  initialCategories?: string[]
+}
+
+const mockProducts = [
   {
     id: 1,
     title: 'Modular Operation Theater',
@@ -73,14 +79,16 @@ const allProducts = [
   },
 ]
 
-const categories = ['All', 'Operation Theatres', 'Critical Care', 'Medical Gas Systems']
 const sortOptions = [
   { value: 'name', label: 'Name (A-Z)' },
   { value: 'featured', label: 'Featured First' },
   { value: 'category', label: 'Category' },
 ]
 
-export function ProductsListingPage() {
+export function ProductsListingPage({ 
+  initialProducts = [], 
+  initialCategories = [] 
+}: ProductsListingPageProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '')
@@ -113,8 +121,23 @@ export function ProductsListingPage() {
     router.replace(newUrl, { scroll: false })
   }, [debouncedSearch, selectedCategory, showFeaturedOnly, sortBy, router])
 
+  // Transform CMS products to component format
+  const transformedProducts = useMemo(() => {
+    if (initialProducts.length > 0) {
+      return initialProducts.map(transformProduct)
+    }
+    // Fallback to mock data if no CMS data
+    return mockProducts
+  }, [initialProducts])
+
+  // Build categories list
+  const categories = useMemo(() => {
+    const cats = ['All', ...initialCategories]
+    return cats.length > 1 ? cats : ['All', 'Operation Theatres', 'Critical Care', 'Medical Gas Systems']
+  }, [initialCategories])
+
   const filteredProducts = useMemo(() => {
-    let filtered = [...allProducts]
+    let filtered = [...transformedProducts]
 
     // Search filter
     if (debouncedSearch) {
@@ -153,7 +176,7 @@ export function ProductsListingPage() {
     })
 
     return filtered
-  }, [debouncedSearch, selectedCategory, showFeaturedOnly, sortBy])
+  }, [debouncedSearch, selectedCategory, showFeaturedOnly, sortBy, transformedProducts])
 
   // Pagination
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)

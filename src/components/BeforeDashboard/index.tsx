@@ -10,58 +10,38 @@ const BeforeDashboard: React.FC = () => {
   return (
     <div className={baseClass}>
       <Banner className={`${baseClass}__banner`} type="success">
-        <h4>Welcome to your dashboard!</h4>
+        <h4>Welcome to Altair Medical System CMS</h4>
       </Banner>
-      Here&apos;s what to do next:
+      <p style={{ marginBottom: '1rem', color: '#6B7280' }}>
+        Manage your website content, products, projects, and events from this dashboard.
+      </p>
+      Here&apos;s what you can do:
       <ul className={`${baseClass}__instructions`}>
         <li>
-          <SeedButton />
-          {' with a few pages, posts, and projects to jump-start your new site, then '}
-          <a href="/" target="_blank">
-            visit your website
-          </a>
-          {' to see the results.'}
+          <strong>Products:</strong> Add and manage modular operation theatres, surgical pendants, bed-head units, and medical gas systems.
         </li>
         <li>
-          {'Modify your '}
-          <a
-            href="https://payloadcms.com/docs/configuration/collections"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            collections
-          </a>
-          {' and add more '}
-          <a
-            href="https://payloadcms.com/docs/fields/overview"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            fields
-          </a>
-          {' as needed. If you are new to Payload, we also recommend you check out the '}
-          <a
-            href="https://payloadcms.com/docs/getting-started/what-is-payload"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Getting Started
-          </a>
-          {' docs.'}
+          <strong>Projects:</strong> Showcase completed installations and case studies.
         </li>
         <li>
-          Commit and push your changes to the repository to trigger a redeployment of your project.
+          <strong>Events:</strong> Manage trade shows, expos, and conferences.
+        </li>
+        <li>
+          <strong>Blog:</strong> Create posts and news articles.
+        </li>
+        <li>
+          <strong>Resources:</strong> Upload technical documents, datasheets, and compliance certificates.
+        </li>
+        <li>
+          <strong>Leads:</strong> View and manage form submissions from contact, quote, and survey forms.
         </li>
       </ul>
-      {'Pro Tip: This block is a '}
-      <a
-        href="https://payloadcms.com/docs/custom-components/overview"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        custom component
-      </a>
-      , you can remove it at any time by updating your <strong>payload.config</strong>.
+      <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: '#6B7280' }}>
+        <a href="/" target="_blank" rel="noopener noreferrer" style={{ color: '#163852' }}>
+          Visit your website
+        </a>
+        {' to see your changes live.'}
+      </p>
     </div>
   )
 }

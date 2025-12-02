@@ -2,6 +2,12 @@ import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { EventsListingPage } from '@/components/pages/events/EventsListingPage'
 import { getServerSideURL } from '@/utilities/getURL'
+import { getEvents, getEventTypes } from '@/lib/api/events'
+import { generateItemListSchema } from '@/utilities/seo'
+import { Loader2 } from 'lucide-react'
+
+export const dynamic = 'force-static'
+export const revalidate = 3600 // Revalidate every hour
 
 const baseUrl = getServerSideURL()
 
@@ -32,11 +38,38 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Events() {
+function EventsLoading() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-clinical-white flex items-center justify-center">Loading...</div>}>
-      <EventsListingPage />
-    </Suspense>
+    <div className="min-h-screen flex items-center justify-center">
+      <Loader2 className="w-8 h-8 animate-spin text-brand-bronze" />
+    </div>
   )
 }
 
+export default async function EventsPage() {
+  // Fetch events and types for schema
+  const [eventsResult, eventTypes] = await Promise.all([
+    getEvents({ limit: 100 }), // Get all for schema
+    getEventTypes(),
+  ])
+
+  const listSchema = generateItemListSchema(
+    eventsResult.docs.map((e) => ({
+      name: e.title || '',
+      url: `/events/${e.slug || ''}`,
+    })),
+    'Altair Medical System Events'
+  )
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
+      />
+      <Suspense fallback={<EventsLoading />}>
+        <EventsListingPage initialEvents={eventsResult.docs} initialEventTypes={eventTypes} />
+      </Suspense>
+    </>
+  )
+}

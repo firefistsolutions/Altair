@@ -78,15 +78,27 @@ export function ContactPage() {
     setSubmitStatus('idle')
 
     try {
-      // TODO: Replace with actual API endpoint in Phase 6
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit form')
+      }
 
       setSubmitStatus('success')
       setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
       setErrors({})
 
       setTimeout(() => setSubmitStatus('idle'), 5000)
-    } catch (_error) {
+    } catch (error: any) {
+      console.error('Form submission error:', error)
       setSubmitStatus('error')
       setTimeout(() => setSubmitStatus('idle'), 5000)
     } finally {

@@ -7,9 +7,14 @@ import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 
 import { Categories } from './collections/Categories'
+import { Events } from './collections/Events'
+import { Leads } from './collections/Leads'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
+import { Products } from './collections/Products'
+import { Projects } from './collections/Projects'
+import { Resources } from './collections/Resources'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
@@ -24,14 +29,15 @@ export default buildConfig({
   admin: {
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below.
       beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below.
       beforeDashboard: ['@/components/BeforeDashboard'],
     },
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+    meta: {
+      titleSuffix: '- Altair Medical System',
     },
     user: Users.slug,
     livePreview: {
@@ -60,6 +66,8 @@ export default buildConfig({
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   db: postgresAdapter({
+    push: process.env.NODE_ENV !== 'production', // Auto-push schema changes in development
+    migrationDir: path.resolve(dirname, '../../migrations'), // Store migrations
     pool: {
       // Handle Supabase connection string - ensure SSL is configured correctly
       connectionString: (() => {
@@ -98,7 +106,18 @@ export default buildConfig({
         : {}),
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [
+    Pages,
+    Posts,
+    Products,
+    Projects,
+    Events,
+    Resources,
+    Media,
+    Categories,
+    Leads,
+    Users,
+  ],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [

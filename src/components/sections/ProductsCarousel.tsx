@@ -6,49 +6,61 @@ import Link from 'next/link'
 import { SectionContainer } from '@/components/ui/section-container'
 import { ProductCard } from '@/components/ui/product-card'
 import { AltairButton } from '@/components/ui/altair-button'
+import type { TransformedProduct } from '@/lib/utils/transform-product'
 
-// Mock products data - will be replaced with CMS data in Phase 6
-const products = [
+interface ProductsCarouselProps {
+  products?: TransformedProduct[]
+}
+
+// Mock products data - fallback if no CMS data
+const mockProducts: TransformedProduct[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Modular Operation Theater',
     description: 'Precision-engineered modular OT with seamless panels, touchless systems, and premium lighting.',
     image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=600&fit=crop&q=80',
+    images: [],
     specs: ['HTM-02-01', 'Seamless Panels', 'Touchless Systems'],
     slug: 'modular-operation-theater',
     category: 'Operation Theatres',
     featured: true,
   },
   {
-    id: 2,
+    id: '2',
     title: 'Surgical Pendant',
     description: 'Advanced surgical pendant with medical gas outlets and electrical services.',
     image: 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=600&fit=crop&q=80',
+    images: [],
     specs: ['CE Certified', 'Gas Outlets', 'Electrical'],
     slug: 'surgical-pendant',
     category: 'Critical Care',
+    featured: false,
   },
   {
-    id: 3,
+    id: '3',
     title: 'Bed-Head Unit',
     description: 'Comprehensive bed-head unit for critical care with integrated medical gas and electrical services.',
     image: 'https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=800&h=600&fit=crop&q=80',
+    images: [],
     specs: ['Oxygen Cleaning', 'Color-Coded', 'ISO 13485'],
     slug: 'bed-head-unit',
     category: 'Critical Care',
+    featured: false,
   },
   {
-    id: 4,
+    id: '4',
     title: 'Medical Gas Manifold',
     description: 'Central medical gas manifold system with alarm panels and zone valve boxes.',
     image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=80',
+    images: [],
     specs: ['Central System', 'Alarm Panels', 'Zone Valves'],
     slug: 'medical-gas-manifold',
     category: 'Medical Gas Systems',
+    featured: false,
   },
 ]
 
-export function ProductsCarousel() {
+export function ProductsCarousel({ products = mockProducts }: ProductsCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
@@ -75,7 +87,7 @@ export function ProductsCarousel() {
       container.removeEventListener('scroll', updateScrollButtons)
       window.removeEventListener('resize', updateScrollButtons)
     }
-  }, [])
+  }, [products])
 
   const scroll = (direction: 'left' | 'right') => {
     if (!containerRef.current) return
@@ -138,6 +150,10 @@ export function ProductsCarousel() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [canScrollLeft, canScrollRight])
 
+  if (products.length === 0) {
+    return null
+  }
+
   return (
     <section className="py-16 md:py-24 bg-clinical-white">
       <SectionContainer>
@@ -185,11 +201,21 @@ export function ProductsCarousel() {
             aria-label="Product carousel"
             tabIndex={0}
           >
-                  {products.map((product, index) => (
-                    <div key={product.id} className="flex-shrink-0 w-full sm:w-80">
-                      <ProductCard {...product} category={product.category} priority={index === 0} />
-                    </div>
-                  ))}
+            {products.map((product, index) => (
+              <div key={product.id} className="flex-shrink-0 w-full sm:w-80">
+                <ProductCard
+                  image={product.image}
+                  title={product.title}
+                  description={product.description}
+                  specs={product.specs}
+                  slug={product.slug}
+                  category={product.category}
+                  featured={product.featured}
+                  datasheetUrl={product.datasheetUrl}
+                  priority={index === 0}
+                />
+              </div>
+            ))}
           </div>
         </div>
 
@@ -203,4 +229,3 @@ export function ProductsCarousel() {
     </section>
   )
 }
-

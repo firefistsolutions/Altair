@@ -3,36 +3,11 @@ import { Suspense } from 'react'
 import { ProjectsListingPage } from '@/components/pages/projects/ProjectsListingPage'
 import { Loader2 } from 'lucide-react'
 import { getServerSideURL } from '@/utilities/getURL'
+import { getProjects, getProjectYears } from '@/lib/api/projects'
+import { generateItemListSchema } from '@/utilities/seo'
 
-// Schema.org ItemList for projects page
-function generateProjectsListSchema() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Altair Medical System Projects',
-    description: 'Successful installations of modular operation theatres and medical gas systems across India',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Government Medical College & Hospital, Jalgaon',
-        url: 'https://altairmedical.com/projects/gmch-jalgaon',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'MAX Super Speciality Hospital, Patparganj',
-        url: 'https://altairmedical.com/projects/max-patparganj',
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Vilasrao Deshmukh Govt. Medical College, Latur',
-        url: 'https://altairmedical.com/projects/vdgmch-latur',
-      },
-    ],
-  }
-}
+export const dynamic = 'force-static'
+export const revalidate = 3600 // Revalidate every hour
 
 const baseUrl = getServerSideURL()
 
@@ -70,8 +45,20 @@ function ProjectsLoading() {
   )
 }
 
-export default function ProjectsPage() {
-  const listSchema = generateProjectsListSchema()
+export default async function ProjectsPage() {
+  // Fetch projects and years for schema
+  const [projectsResult, years] = await Promise.all([
+    getProjects({ limit: 100 }), // Get all for schema
+    getProjectYears(),
+  ])
+
+  const listSchema = generateItemListSchema(
+    projectsResult.docs.map((p) => ({
+      name: p.title || '',
+      url: `/projects/${p.slug || ''}`,
+    })),
+    'Altair Medical System Projects'
+  )
 
   return (
     <>
@@ -80,9 +67,8 @@ export default function ProjectsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }}
       />
       <Suspense fallback={<ProjectsLoading />}>
-        <ProjectsListingPage />
+        <ProjectsListingPage initialProjects={projectsResult.docs} initialYears={years} />
       </Suspense>
     </>
   )
 }
-

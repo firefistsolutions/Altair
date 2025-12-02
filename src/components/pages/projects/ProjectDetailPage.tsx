@@ -9,18 +9,10 @@ import { AltairButton } from '@/components/ui/altair-button'
 import { AltairBadge } from '@/components/ui/altair-badge'
 import { AltairCard } from '@/components/ui/altair-card'
 import { ProjectCard } from '@/components/ui/project-card'
+import type { TransformedProject } from '@/lib/utils/transform-project'
 
 interface ProjectDetailPageProps {
-  project: {
-    slug: string
-    title: string
-    client: string
-    image: string
-    images: string[]
-    metrics: { label: string; value: string }[]
-    hospitalType: string
-    year: string
-    location: string
+  project: TransformedProject & {
     challenge?: string
     solution?: string
     products?: string[]
@@ -32,10 +24,10 @@ interface ProjectDetailPageProps {
     }
     outcomes?: string[]
   }
+  relatedProjects?: TransformedProject[]
 }
 
-// Mock related projects - will be replaced with CMS data in Phase 6
-const relatedProjects = [
+const mockRelatedProjects = [
   {
     id: 2,
     title: 'MAX Super Speciality Hospital, Patparganj',
@@ -60,7 +52,7 @@ const relatedProjects = [
   },
 ]
 
-export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
+export function ProjectDetailPage({ project, relatedProjects = [] }: ProjectDetailPageProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
 
@@ -148,7 +140,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
       <section className="py-8 md:py-12 bg-brand-navy text-white">
         <SectionContainer>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-            {project.metrics.map((metric, index) => (
+            {(project.metrics || []).map((metric, index) => (
               <div key={index} className="text-center">
                 <p className="text-3xl md:text-4xl font-bold text-brand-bronze mb-2">{metric.value}</p>
                 <p className="text-sm md:text-base text-white/90">{metric.label}</p>
@@ -289,7 +281,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
             <div className="max-w-4xl">
               <h2 className="text-3xl font-bold text-brand-navy mb-8">Project Outcomes</h2>
               <div className="grid md:grid-cols-2 gap-6">
-                {project.outcomes.map((outcome, index) => (
+                {(project.outcomes && Array.isArray(project.outcomes) ? project.outcomes : []).map((outcome: any, index: number) => (
                   <div key={index} className="flex items-start gap-3">
                     <CheckCircle2 className="w-6 h-6 text-brand-bronze flex-shrink-0 mt-0.5" />
                     <p className="text-slate-gray">{outcome}</p>
@@ -307,7 +299,7 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
           <div className="max-w-7xl">
             <h2 className="text-3xl font-bold text-brand-navy mb-8">Related Projects</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {relatedProjects.slice(0, 3).map((relatedProject, index) => (
+              {(relatedProjects.length > 0 ? relatedProjects : mockRelatedProjects).slice(0, 3).map((relatedProject, index) => (
                 <ProjectCard key={relatedProject.id} {...relatedProject} priority={index === 0} />
               ))}
             </div>
