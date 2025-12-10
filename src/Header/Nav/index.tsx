@@ -13,13 +13,20 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   // Fallback navigation if no CMS data
   const fallbackNavItems = [
     { link: { url: '/products', label: 'Products' } },
-    { link: { url: '/projects', label: 'Projects' } },
     { link: { url: '/events', label: 'Events' } },
     { link: { url: '/about', label: 'About' } },
     { link: { url: '/contact', label: 'Contact' } },
   ]
 
-  const itemsToRender = navItems.length > 0 ? navItems : fallbackNavItems
+  // Filter out Projects from nav items
+  const filteredNavItems = navItems.filter(
+    (item) => item.link?.url !== '/projects' && item.link?.label !== 'Projects'
+  )
+  const filteredFallbackNavItems = fallbackNavItems.filter(
+    (item) => item.link?.url !== '/projects' && item.link?.label !== 'Projects'
+  )
+
+  const itemsToRender = filteredNavItems.length > 0 ? filteredNavItems : filteredFallbackNavItems
 
   return (
     <nav className="flex flex-col md:flex-row gap-4 md:gap-6 md:items-center" aria-label="Main navigation">

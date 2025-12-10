@@ -10,10 +10,10 @@ const baseUrl = getServerSideURL()
 
 export const metadata: Metadata = {
   title: 'Search | Altair Medical System',
-  description: 'Search our products, projects, events, blog posts, and resources.',
+  description: 'Search our products, events, blog posts, and resources.',
   openGraph: {
     title: 'Search | Altair Medical System',
-    description: 'Search our products, projects, events, blog posts, and resources.',
+    description: 'Search our products, events, blog posts, and resources.',
     type: 'website',
     url: `${baseUrl}/search`,
   },

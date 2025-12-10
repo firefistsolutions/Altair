@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Search, Loader2, Package, Building2, Calendar, FileText, BookOpen } from 'lucide-react'
+import { Search, Loader2, Package, Calendar, FileText, BookOpen } from 'lucide-react'
 import { SectionContainer } from '@/components/ui/section-container'
 import { AltairCard } from '@/components/ui/altair-card'
 import { AltairButton } from '@/components/ui/altair-button'
@@ -14,13 +14,12 @@ import { getClientSideURL } from '@/utilities/getURL'
 
 interface SearchResult {
   id: string | number
-  type: 'product' | 'project' | 'event' | 'post' | 'resource'
+  type: 'product' | 'event' | 'post' | 'resource'
   title: string
   description?: string
   slug: string
   image?: string | { url?: string } | null
   category?: string
-  client?: string
   location?: string
   year?: number
   startDate?: string | Date
@@ -37,7 +36,6 @@ interface SearchResultsPageProps {
 const typeLabels = {
   all: 'All Results',
   products: 'Products',
-  projects: 'Projects',
   events: 'Events',
   posts: 'Blog Posts',
   resources: 'Resources',
@@ -45,7 +43,6 @@ const typeLabels = {
 
 const typeIcons = {
   product: Package,
-  project: Building2,
   event: Calendar,
   post: FileText,
   resource: BookOpen,
@@ -53,7 +50,6 @@ const typeIcons = {
 
 const typeColors = {
   product: 'bronze',
-  project: 'default',
   event: 'outline',
   post: 'default',
   resource: 'outline',
@@ -75,7 +71,6 @@ function getMediaUrl(media: string | { url?: string } | null | undefined): strin
 function getResultUrl(result: SearchResult): string {
   const basePaths = {
     product: '/products',
-    project: '/projects',
     event: '/events',
     post: '/posts',
     resource: '/resources',
@@ -90,13 +85,11 @@ export function SearchResultsPage({ initialQuery = '', initialType = 'all' }: Se
   const [selectedType, setSelectedType] = useState(initialType)
   const [results, setResults] = useState<{
     products: SearchResult[]
-    projects: SearchResult[]
     events: SearchResult[]
     posts: SearchResult[]
     resources: SearchResult[]
   }>({
     products: [],
-    projects: [],
     events: [],
     posts: [],
     resources: [],
@@ -108,7 +101,6 @@ export function SearchResultsPage({ initialQuery = '', initialType = 'all' }: Se
   const allResults = useMemo(() => {
     return [
       ...results.products,
-      ...results.projects,
       ...results.events,
       ...results.posts,
       ...results.resources,
@@ -126,7 +118,7 @@ export function SearchResultsPage({ initialQuery = '', initialType = 'all' }: Se
     if (searchQuery.trim()) {
       performSearch(searchQuery, selectedType)
     } else {
-      setResults({ products: [], projects: [], events: [], posts: [], resources: [] })
+      setResults({ products: [], events: [], posts: [], resources: [] })
       setTotalResults(0)
     }
   }, [searchQuery, selectedType])
@@ -154,7 +146,7 @@ export function SearchResultsPage({ initialQuery = '', initialType = 'all' }: Se
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : 'An error occurred while searching'
       setError(errorMessage)
-      setResults({ products: [], projects: [], events: [], posts: [], resources: [] })
+      setResults({ products: [], events: [], posts: [], resources: [] })
       setTotalResults(0)
     } finally {
       setIsLoading(false)
@@ -196,7 +188,7 @@ export function SearchResultsPage({ initialQuery = '', initialType = 'all' }: Se
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-gray" />
               <Input
                 type="text"
-                placeholder="Search products, projects, events, blog posts, and resources..."
+                placeholder="Search products, events, blog posts, and resources..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 pr-4 py-6 text-lg bg-white text-brand-navy"

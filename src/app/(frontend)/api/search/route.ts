@@ -6,7 +6,7 @@ import { logger } from '@/lib/logger'
 
 const searchSchema = z.object({
   query: z.string().min(1, 'Search query is required'),
-  type: z.enum(['all', 'products', 'projects', 'events', 'posts', 'resources']).optional(),
+  type: z.enum(['all', 'products', 'events', 'posts', 'resources']).optional(),
   limit: z.number().int().min(1).max(50).optional().default(20),
   page: z.number().int().min(1).optional().default(1),
 })
@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
   try {
     const searchParams = req.nextUrl.searchParams
     const query = searchParams.get('q') || searchParams.get('query') || ''
-    const type = (searchParams.get('type') || 'all') as 'all' | 'products' | 'projects' | 'events' | 'posts' | 'resources'
+    const type = (searchParams.get('type') || 'all') as 'all' | 'products' | 'events' | 'posts' | 'resources'
     const limit = parseInt(searchParams.get('limit') || '20', 10)
     const page = parseInt(searchParams.get('page') || '1', 10)
 
@@ -42,13 +42,11 @@ export async function GET(req: NextRequest) {
     
     const results: {
       products: SearchResultItem[]
-      projects: SearchResultItem[]
       events: SearchResultItem[]
       posts: SearchResultItem[]
       resources: SearchResultItem[]
     } = {
       products: [],
-      projects: [],
       events: [],
       posts: [],
       resources: [],
@@ -109,67 +107,6 @@ export async function GET(req: NextRequest) {
             ? { url: product.image.url || null }
             : null,
           category: typeof product.category === 'string' ? product.category : '',
-        }
-      })
-    }
-
-    // Search Projects
-    if (validated.type === 'all' || validated.type === 'projects') {
-      const projects = await payload.find({
-        collection: 'projects',
-        where: {
-          and: [
-            {
-              _status: {
-                equals: 'published',
-              },
-            },
-            {
-              or: [
-                {
-                  title: {
-                    contains: searchQuery,
-                  },
-                },
-                {
-                  client: {
-                    contains: searchQuery,
-                  },
-                },
-                {
-                  location: {
-                    contains: searchQuery,
-                  },
-                },
-              ],
-            },
-          ],
-        },
-        limit: validated.limit,
-        page: validated.page,
-        depth: 1,
-      })
-      results.projects = projects.docs.map((project) => {
-        // Extract description from RichText or use empty string
-        let description = ''
-        if (typeof project.description === 'string') {
-          description = project.description
-        } else if (typeof project.description === 'object' && project.description !== null) {
-          description = JSON.stringify(project.description)
-        }
-        
-        return {
-          id: project.id,
-          type: 'project',
-          title: project.title || '',
-          description: description.substring(0, 200), // Limit length
-          slug: project.slug || '',
-          image: typeof project.image === 'object' && project.image !== null 
-            ? { url: project.image.url || null }
-            : null,
-          client: typeof project.client === 'string' ? project.client : '',
-          location: typeof project.location === 'string' ? project.location : '',
-          year: project.year || 0,
         }
       })
     }
@@ -320,7 +257,6 @@ export async function GET(req: NextRequest) {
     // Calculate totals
     const totalResults =
       results.products.length +
-      results.projects.length +
       results.events.length +
       results.posts.length +
       results.resources.length
